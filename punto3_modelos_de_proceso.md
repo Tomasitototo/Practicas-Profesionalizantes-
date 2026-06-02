@@ -2,43 +2,75 @@
 
 > **FitConnect – Trabajo Práctico Primera Etapa**
 
----
+# Comparación de los Modelos de Proceso para FitConnect
 
-## Tabla comparativa de Modelos de Proceso
+## Modelo Cascada
 
-| Modelo de Proceso | Ventaja para FitConnect | Desventaja para FitConnect |
-|---|---|---|
-| **Modelo Cascada** | Permite documentar muy bien los requisitos iniciales (marketplace de trainers, sistema de seguimiento, modelo freemium), lo que facilita una arquitectura ordenada desde el principio. | FitConnect requiere feedback constante de usuarios y trainers; la cascada no permite volver atrás fácilmente si los requisitos cambian o si las pruebas revelan problemas en etapas anteriores. |
-| **Modelo en V** | Al tener pruebas definidas para cada fase de desarrollo, garantiza que funcionalidades críticas como el sistema de pagos (comisión de la plataforma) y el seguimiento de progreso sean verificadas formalmente. | Es rígido y costoso de modificar. Si durante las pruebas de integración se descubre que el sistema de seguimiento no satisface a los usuarios, corregirlo implica retroceder varias fases. |
-| **Modelo Incremental** | Permite lanzar una versión funcional básica de FitConnect (biblioteca de ejercicios + dos programas básicos del plan gratuito) e ir agregando funcionalidades como el marketplace o el análisis avanzado en incrementos posteriores. | Cada incremento debe integrarse con los anteriores; si la arquitectura inicial no fue bien pensada, la integración de módulos como la comunidad o las herramientas para trainers puede volverse compleja y generar deuda técnica. |
-| **Modelo Iterativo** | Permite refinar funcionalidades a partir del feedback real de usuarios como Enzo (usuario activo) y Ana (Head de Entrenadores), mejorando aspectos como la UX de búsqueda de trainers o la visualización de gráficos de progreso en cada iteración. | Sin un backlog bien priorizado, las iteraciones pueden perder foco y consumir tiempo en mejoras menores en lugar de avanzar en funcionalidades core de la plataforma. |
-| **Modelo de Prototipos** | Muy útil en las etapas tempranas para validar con usuarios reales cómo debería verse el marketplace de trainers, el flujo de suscripción freemium o el sistema de seguimiento, antes de invertir en desarrollo. | El riesgo de "prototype creep": que el equipo termine construyendo sobre un prototipo descartable en lugar de rediseñar correctamente, generando una base de código frágil que no cumpla los requisitos de rendimiento (inicio < 3 segundos, < 200 MB). |
-| **Modelo en Espiral** | Incorpora análisis de riesgos en cada vuelta, ideal para una plataforma que maneja datos sensibles de usuarios y transacciones económicas (Mara – Legal/Risk & Insurance), y que debe cumplir requisitos de rendimiento en dispositivos de gama media-baja. | Es un modelo costoso en tiempo y recursos de gestión. Para un proyecto que necesita salir al mercado con agilidad, las múltiples rondas de análisis de riesgo pueden retrasar los lanzamientos. |
-| **Modelo Ágil (Scrum/XP)** | Permite trabajar con sprints cortos, adaptarse rápido a cambios de mercado (el fitness digital es muy dinámico), incorporar feedback continuo de Gabriel (Product Manager), Ana y Enzo, y entregar valor incremental con cada sprint. | Requiere disponibilidad constante del cliente/stakeholder y un equipo con experiencia en Agile. Si los roles no están bien definidos o hay poca comunicación entre el equipo y los stakeholders, los sprints pueden perder dirección. |
+* Permite organizar y documentar todos los requisitos desde el inicio del proyecto.
+* Facilita la planificación porque cada etapa se realiza una sola vez y en un orden definido.
+* Como desventaja, es difícil realizar cambios cuando el desarrollo ya está avanzado.
+* No resulta conveniente para FitConnect porque las necesidades de los usuarios pueden cambiar a medida que la aplicación se prueba y mejora.
 
----
+## Modelo en V
 
-## Modelo recomendado para FitConnect
+* Incluye verificaciones y pruebas en cada etapa del desarrollo.
+* Ayuda a garantizar que funciones importantes, como los pagos y el seguimiento del progreso, funcionen correctamente.
+* Su principal desventaja es que los cambios pueden ser costosos y requerir volver a etapas anteriores.
+* Puede resultar poco flexible para un proyecto que necesita adaptarse constantemente a los usuarios.
 
-**Recomendamos el Modelo Ágil (Scrum)**, complementado con prácticas de **Modelo Incremental** para las primeras versiones.
+## Modelo Incremental
 
-### Justificación
+* Permite desarrollar la aplicación por partes.
+* Se puede lanzar una versión básica con algunas funciones y agregar nuevas características más adelante.
+* Ayuda a que los usuarios comiencen a utilizar el producto antes de que esté completamente terminado.
+* Si las primeras decisiones de diseño no son adecuadas, agregar nuevas funciones puede volverse más complicado.
 
-**Scrum** es el modelo más adecuado por los siguientes motivos directamente relacionados con el contexto de FitConnect:
+## Modelo Iterativo
 
-1. **Requisitos cambiantes y dinámicos:** FitConnect opera en el mercado del fitness digital, que cambia rápido. Las necesidades de los usuarios (Enzo) y los trainers (Ana) pueden evolucionar durante el desarrollo; Scrum permite adaptarse en cada sprint sin frenar el proyecto.
+* Permite mejorar continuamente el producto a partir de la experiencia de los usuarios.
+* Cada nueva versión incorpora correcciones y mejoras.
+* Favorece la adaptación a nuevas necesidades o sugerencias.
+* Requiere una buena organización para evitar dedicar demasiado tiempo a cambios poco importantes.
 
-2. **Stakeholders accesibles para feedback continuo:** El enunciado presenta personas concretas con quienes dialogar: Gabriel (Product Manager), Ana (Head de Entrenadores), Enzo (usuario activo), Mara (Legal) y Diego (CTO/DevOps). Esto es exactamente lo que Scrum necesita: un Product Owner con acceso a interesados reales que puedan validar cada entrega.
+## Modelo de Prototipos
 
-3. **Entrega de valor temprana:** Con Scrum se puede lanzar una primera versión funcional con la biblioteca de ejercicios y los dos programas básicos (plan gratuito), e ir sumando el marketplace, el sistema de seguimiento avanzado y las herramientas para trainers en sprints posteriores.
+* Permite mostrar versiones preliminares de la aplicación antes de desarrollar el producto final.
+* Ayuda a conocer la opinión de los usuarios y validar ideas.
+* Reduce el riesgo de desarrollar funciones que luego no sean útiles.
+* Como desventaja, existe el riesgo de utilizar prototipos como producto final sin realizar las mejoras necesarias.
 
-4. **Requisitos técnicos no funcionales claros:** Los requisitos de rendimiento (inicio < 3 segundos, < 200 MB, compatibilidad con gama media-baja) pueden incorporarse como criterios de aceptación en cada sprint, asegurando que no se descuiden a lo largo del desarrollo.
+## Modelo en Espiral
 
-5. **Modelo freemium requiere iteración:** La lógica del modelo de negocio (gratuito vs. premium, comisión por transacción de trainers) necesita validarse con usuarios reales antes de escalar; Scrum permite pivotar rápido si algo no funciona como se espera.
+* Se enfoca en identificar y reducir riesgos durante todo el proyecto.
+* Es útil para aplicaciones que manejan datos personales y transacciones económicas.
+* Permite analizar problemas antes de que generen grandes inconvenientes.
+* Requiere más tiempo, planificación y recursos que otros modelos.
 
-### Factores del proyecto que influyeron en la decisión
+## Modelo Ágil (Scrum)
 
-- La existencia de **distintos tipos de usuarios** (personas que entrenan, trainers, administradores de la plataforma) con necesidades diferentes requiere iterar y validar con cada grupo.
-- El **modelo freemium** implica que las funcionalidades premium deben justificarse con valor real percibido por el usuario, algo que solo se descubre con feedback continuo.
-- Los **requisitos de rendimiento en dispositivos de gama media-baja** requieren pruebas frecuentes en condiciones reales, lo cual encaja con los ciclos cortos de Scrum.
-- La **presencia de un área legal (Mara)** que debe revisar aspectos de riesgo y seguros sugiere que el equipo necesita flexibilidad para incorporar observaciones legales sin bloquear el desarrollo completo.
+* Permite trabajar en períodos cortos llamados sprints.
+* Facilita la incorporación de cambios y sugerencias de los usuarios.
+* Permite entregar nuevas funciones de manera frecuente.
+* Favorece la comunicación constante entre el equipo y los interesados en el proyecto.
+* Requiere una participación activa de todos los involucrados y una buena organización del equipo.
+
+# Modelo Recomendado para FitConnect
+
+Se recomienda utilizar el Modelo Ágil (Scrum), complementado con un enfoque incremental durante las primeras versiones de la plataforma.
+
+## Justificación
+
+* FitConnect se desarrolla en un mercado dinámico donde las necesidades de los usuarios pueden cambiar rápidamente.
+* Los usuarios, entrenadores y responsables de la plataforma pueden brindar opiniones constantes para mejorar el producto.
+* Permite lanzar una versión inicial funcional y agregar nuevas características progresivamente.
+* Facilita realizar mejoras continuas en el rendimiento y la experiencia de uso.
+* El modelo de negocio freemium necesita ser probado y ajustado según la respuesta de los usuarios.
+
+## Factores que influyeron en la decisión
+
+* La plataforma está dirigida a distintos tipos de usuarios, cada uno con necesidades diferentes.
+* Es importante validar constantemente que las funciones ofrecidas realmente aporten valor.
+* Se necesita garantizar un buen funcionamiento en distintos dispositivos.
+* Deben poder incorporarse cambios relacionados con aspectos legales o de seguridad sin afectar todo el desarrollo.
+* La posibilidad de recibir retroalimentación constante favorece la mejora continua del producto.
+
