@@ -1,19 +1,18 @@
 2. Identificación de Problemas
 
-Problema 1: Lo caro y complicado que es empezar a entrenar de forma normal.
-¿A quién afecta este problema? A las personas que quieren arrancar una rutina de ejercicio pero los frenan las membresías caras de los gimnasios, no tener máquinas o directamente no saber por dónde empezar
-.
-¿Cómo FitConnect resuelve este problema? Se enfoca en la calistenia, que se puede practicar en cualquier lado y sin gastar en equipamiento. Aparte, gracias a su modelo freemium, ofrece una versión gratuita con programas básicos, eliminando completamente la barrera económica.
-Nivel de impacto/importancia: 1 (más importante).
+Problema 1: Lo difícil y caro que es empezar a entrenar.
+¿A quién afecta este problema? A personas que quieren empezar a hacer ejercicio pero se ven frenadas porque los gimnasios son caros, no tienen máquinas en sus casas o les da pereza llenar registros largos en otras aplicaciones.
+¿Cómo FitConnect resuelve este problema? Ofreciendo un modelo gratuito (freemium) enfocado en la calistenia, que se puede hacer en cualquier lado sin gastar plata. Además, permite que el usuario se registre y empiece a entrenar de forma súper rápida, en menos de tres pasos.
+Nivel de impacto/importancia: 1 (Más importante)
 
-Problema 2: El límite de alcance que tienen los profes para conseguir clientes.
-¿A quién afecta este problema? A los entrenadores personales que se ven limitados a dar clases solo en el espacio físico de su gimnasio local y buscan llegar a más alumnos.
-¿Cómo FitConnect resuelve este problema? La app les da un espacio a los profes para ofrecer clases virtuales y rutinas personalizadas. También pueden poner sus propios precios, dándoles herramientas para diseñar rutinas y elegir cuánto cobrar.
-Nivel de impacto/importancia: 2.
+Problema 2: Estancarse, perder la motivación y el miedo a lesionarse por entrenar solo.
+¿A quién afecta este problema? A los usuarios que ya entrenan por su cuenta (como Enzo) pero sienten que no avanzan o tienen miedo de hacer los ejercicios mal al no tener una guía clara.
+¿Cómo FitConnect resuelve este problema? Teniendo un sistema de seguimiento desde el principio, que le muestra al usuario gráficos de su avance, récords personales y tiempos, para que pueda ver en la pantalla que realmente está mejorando.
+Nivel de impacto/importancia: 2
 
-Problema 3: Estancarse y perder la motivación cuando se entrena por cuenta propia.
-¿A quién afecta este problema? A los usuarios que entrenan solos, que muchas veces no saben cómo medir si están mejorando o terminan abandonando por aburrimiento.
-¿Cómo FitConnect resuelve este problema? También tiene gráficos y seguimiento del progreso para que el usuario vea si está mejorando y no pierda la motivación. Además, suma grupos temáticos y retos entre usuarios para que no pierdan la motivación.
-Nivel de impacto/importancia: 3 (menos importante). 
+Problema 3: La desorganización de los entrenadores para manejar a sus alumnos a distancia.
+¿A quién afecta este problema? A los entrenadores que consiguen alumnos por internet, pero se vuelven locos y pierden tiempo intentando armarles rutinas en Excel, mandar PDFs o hacerles seguimiento por WhatsApp.
+¿Cómo FitConnect resuelve este problema? Dándoles a los profes un panel de control donde pueden armar y copiar rutinas fácilmente, tener la lista de sus clientes ordenada y cobrar con un sistema de comisiones claro.
+Nivel de impacto/importancia: 3 (Menos importante)
 
-¿Por qué este orden y criterio? El criterio se basa en la Etapa 0 del Proceso Ingenieril (Identificación del Problema), que nos dice que hay que enfocarse primero en el dolor principal para que el proyecto valga la pena. El Nivel 1 es la idea principal de la aplicación. (la demanda de los usuarios). El Nivel 2 es importante para que la app funcione bien (la oferta de los entrenadores). Por último, el Nivel 3 (gráficos y seguimiento) queda al final porque es una función para retener al usuario, pero solo sirve si primero logramos resolver sus barreras de acceso.
+¿Por qué ordenaron estos problemas en ese nivel de impacto/importancia? Ordenamos los problemas pensando en qué necesita la aplicación para funcionar desde el día uno. El Nivel 1 es atraer a la gente: si no eliminamos las barreras de entrada (que sea gratis y rápido de usar), no vamos a tener usuarios. El Nivel 2 es para que esa gente no se vaya (retención): si el usuario entra pero no ve su progreso con gráficos, se aburre y abandona la app rápido. Finalmente, el Nivel 3 quedó último porque, si logramos tener muchos usuarios activos usando la app, los entrenadores van a querer sumarse solos; de todas formas, es importante darles buenas herramientas para que se queden y no se vayan a la competencia.
