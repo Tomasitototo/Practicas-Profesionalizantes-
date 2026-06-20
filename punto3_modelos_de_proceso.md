@@ -1,76 +1,37 @@
 # Punto 3 – Modelos de Proceso
 
-> **FitConnect – Trabajo Práctico Primera Etapa**
+## FitConnect – Trabajo Práctico Primera Etapa
+**Grupo de Trabajo:agustin curvetto y santiago menghi 
 
 # Comparación de los Modelos de Proceso para FitConnect
 
-## Modelo Cascada
+| Modelo de Proceso | Ventaja Aplicada a FitConnect | Desventaja Aplicada a FitConnect |
+| :--- | :--- | :--- |
+| **Modelo Cascada** | Permite definir, estructurar y congelar con rigor técnico los exigentes requisitos de arquitectura de Diego (instalador <200MB, inicio <3s, CDN con HLS/DASH) y las normativas de Mara (GDPR/HIPAA) antes de iniciar la fase de codificación. | Es completamente inviable debido al fuerte conflicto de alcance inicial del MVP: Gabriel prioriza al usuario final y quiere postergar el marketplace, mientras que Ana exige un panel para entrenadores desde el día uno y Mara exige auditorías inmediatas. Un cambio tardío paralizaría el proyecto. |
+| **Modelo en V** | Vincula de manera estricta cada fase de diseño con su correspondiente plan de pruebas, lo cual es ideal para asegurar el 99.5% de uptime del backend exigido por el CTO y testear de forma temprana los fallbacks automáticos ante latencias mayores a 800 ms. | Carece de la flexibilidad necesaria para resolver las discrepancias del equipo. Si se descubre en fases avanzadas que el flujo de comisiones de Ana o las pantallas de Términos y Condiciones de Mara dañan la experiencia de usuario de 3 taps planteada por Gabriel, la reingeniería sería sumamente costosa. |
+| **Modelo Incremental** | Permite priorizar la visión de negocio de Gabriel: lanzar de inmediato un núcleo básico enfocado en el usuario final (configuración en <3 taps, planes de 4, 8 o 16 semanas) para captar rápidamente los 15k usuarios planeados, dejando funciones complejas para etapas posteriores. | Genera un riesgo regulatorio y comercial crítico. Si se lanza un incremento que omita el panel de plantillas de Ana o la retención de comisiones automatizada auditada de Mara, FitConnect sufrirá una deserción del 85% de los entrenadores y severas contingencias legales por violar la privacidad de datos. |
+| **Modelo Iterativo** | Facilita el refinamiento continuo de la biblioteca de ejercicios de calistenia y los sistemas de tracking básico a partir del feedback de usuarios reales como Enzo, permitiendo reaccionar de manera ágil ante el "brutal churn" del mercado fitness que preocupa al Product Manager. | Corre el riesgo de desviar los recursos del equipo en ciclos infinitos de ajustes de la interfaz de usuario (UX) o rediseño de rutinas, postergando soluciones de infraestructura crítica como la gestión de caché LRU de 50MB de Diego o las auditorías de privacidad de Mara. |
+| **Modelo de Prototipos** | Excelente para construir maquetas funcionales de la herramienta drag-and-drop de Ana o de los flujos de consentimiento informado de Mara, validando con entrenadores y usuarios premium su usabilidad y adopción antes de escribir el código final. | Existe el peligro de que los stakeholders confundan un prototipo de interfaz fluido con la aplicación real, subestimando la compleja ingeniería de backend requerida por Diego para soportar streaming adaptativo por bitrate y el cifrado de datos biométricos sensibles. |
+| **Modelo en Espiral** | Es el enfoque ideal para identificar, evaluar y neutralizar los grandes riesgos del proyecto: los riesgos técnicos de Diego (streaming vs local) y los riesgos patrimoniales/legales de Mara (almacenamiento de fotos premium bajo HIPAA/GDPR y validación documental KYC). | Exige un esfuerzo masivo en planificación, tiempo y personal calificado para el análisis de riesgos en cada ciclo. Esto ralentizaría el despliegue continuo de la aplicación, chocando directamente con la urgencia de Gabriel de captar demanda de forma inmediata. |
+| **Modelo Ágil (Scrum)** | Permite balancear los intereses en conflicto mediante un Product Backlog dinámico. En sprints cortos de 2 a 4 semanas se puede estabilizar el core para el usuario (Gabriel) incorporando paralelamente las plantillas mínimas para entrenadores (Ana) y las pantallas de T&C obligatorias (Mara). | Requiere una sincronización extrema y una participación muy activa de todos los líderes. Si el Product Owner es incapaz de arbitrar con firmeza entre las presiones de Gabriel, las demandas de Ana y los bloqueos mandatorios de Mara, el equipo de desarrollo caerá en parálisis o deuda técnica. |
 
-* Permite organizar y documentar todos los requisitos desde el inicio del proyecto.
-* Facilita la planificación porque cada etapa se realiza una sola vez y en un orden definido.
-* Como desventaja, es difícil realizar cambios cuando el desarrollo ya está avanzado.
-* No resulta conveniente para FitConnect porque las necesidades de los usuarios pueden cambiar a medida que la aplicación se prueba y mejora.
-
-## Modelo en V
-
-* Incluye verificaciones y pruebas en cada etapa del desarrollo.
-* Ayuda a garantizar que funciones importantes, como los pagos y el seguimiento del progreso, funcionen correctamente.
-* Su principal desventaja es que los cambios pueden ser costosos y requerir volver a etapas anteriores.
-* Puede resultar poco flexible para un proyecto que necesita adaptarse constantemente a los usuarios.
-
-## Modelo Incremental
-
-* Permite desarrollar la aplicación por partes.
-* Se puede lanzar una versión básica con algunas funciones y agregar nuevas características más adelante.
-* Ayuda a que los usuarios comiencen a utilizar el producto antes de que esté completamente terminado.
-* Si las primeras decisiones de diseño no son adecuadas, agregar nuevas funciones puede volverse más complicado.
-
-## Modelo Iterativo
-
-* Permite mejorar continuamente el producto a partir de la experiencia de los usuarios.
-* Cada nueva versión incorpora correcciones y mejoras.
-* Favorece la adaptación a nuevas necesidades o sugerencias.
-* Requiere una buena organización para evitar dedicar demasiado tiempo a cambios poco importantes.
-
-## Modelo de Prototipos
-
-* Permite mostrar versiones preliminares de la aplicación antes de desarrollar el producto final.
-* Ayuda a conocer la opinión de los usuarios y validar ideas.
-* Reduce el riesgo de desarrollar funciones que luego no sean útiles.
-* Como desventaja, existe el riesgo de utilizar prototipos como producto final sin realizar las mejoras necesarias.
-
-## Modelo en Espiral
-
-* Se enfoca en identificar y reducir riesgos durante todo el proyecto.
-* Es útil para aplicaciones que manejan datos personales y transacciones económicas.
-* Permite analizar problemas antes de que generen grandes inconvenientes.
-* Requiere más tiempo, planificación y recursos que otros modelos.
-
-## Modelo Ágil (Scrum)
-
-* Permite trabajar en períodos cortos llamados sprints.
-* Facilita la incorporación de cambios y sugerencias de los usuarios.
-* Permite entregar nuevas funciones de manera frecuente.
-* Favorece la comunicación constante entre el equipo y los interesados en el proyecto.
-* Requiere una participación activa de todos los involucrados y una buena organización del equipo.
+---
 
 # Modelo Recomendado para FitConnect
 
-Se recomienda utilizar el Modelo Ágil (Scrum), complementado con un enfoque incremental durante las primeras versiones de la plataforma.
+Se recomienda utilizar el **Modelo Ágil (Scrum)**, complementado con un enfoque incremental y de gestión de riesgos durante las primeras iteraciones de la plataforma.
 
 ## Justificación
 
-* FitConnect se desarrolla en un mercado dinámico donde las necesidades de los usuarios pueden cambiar rápidamente.
-* Los usuarios, entrenadores y responsables de la plataforma pueden brindar opiniones constantes para mejorar el producto.
-* Permite lanzar una versión inicial funcional y agregar nuevas características progresivamente.
-* Facilita realizar mejoras continuas en el rendimiento y la experiencia de uso.
-* El modelo de negocio freemium necesita ser probado y ajustado según la respuesta de los usuarios.
+1. **Resolución del Conflicto de Alcance del MVP (Gabriel vs. Ana):** En FitConnect no se puede priorizar al usuario final desatendiendo al entrenador, ni viceversa; el modelo de negocio freemium es un marketplace simbiótico. Scrum, a través de las sesiones de *Sprint Planning*, permite fragmentar los requerimientos en Historias de Usuario mínimas viables. Por ejemplo, en el Sprint 1 se puede implementar una configuración ágil de usuario en menos de 3 taps (Gabriel) alimentada por un panel simplificado de plantillas de planes (Ana), asegurando que haya contenido de calidad para que los usuarios como Enzo no abandonen la app en la semana 4, reteniendo a su vez al 85% de los entrenadores.
+2. **Mitigación de Riesgos Legales y de Cumplimiento desde el Día Uno (Mara):** Mara (Legal) advierte de forma tajante que postergar la auditoría de la retención automatizada de comisiones y las políticas de privacidad para las fotos de progreso (datos sensibles regulados por HIPAA y GDPR) es una exposición patrimonial inaceptable. Scrum permite mitigar esto convirtiendo los requisitos legales en Criterios de Aceptación obligatorios (*Definition of Done*) o en Historias de Usuario técnicas prioritarias desde el primer Sprint, asegurando el desarrollo de la pantalla de pre-actividad (T&C) y el flujo de verificación documental de identidades y certificaciones antes de procesar transacciones.
+3. **Validación de la Arquitectura de Software Fija (Diego):** Las restricciones del CTO son estrictas e innegociables: el instalador debe pesar menos de 200MB y arrancar en menos de 3 segundos utilizando streaming CDN con HLS/DASH y caché local LRU de 50MB. El enfoque ágil permite realizar *Spikes* de arquitectura (bloques de investigación técnica y pruebas de estrés) en los primeros Sprints para validar que la app no quede en pantalla negra si el CDN falla, logrando un despliegue continuo y seguro sin arrastrar deudas técnicas del "pasado" (como embeber videos locales).
+4. **Combate al Churn del Mercado Fitness:** Las entregas de incrementos de producto potencialmente desplegables al final de cada Sprint permiten recolectar métricas empíricas de adopción de manera inmediata. Esto permite al equipo pivotar la estrategia de la biblioteca de ejercicios, los gráficos de volumen o el sistema de gamificación de la comunidad basándose en la experiencia de uso real y no en supuestos.
 
 ## Factores que influyeron en la decisión
 
-* La plataforma está dirigida a distintos tipos de usuarios, cada uno con necesidades diferentes.
-* Es importante validar constantemente que las funciones ofrecidas realmente aporten valor.
-* Se necesita garantizar un buen funcionamiento en distintos dispositivos.
-* Deben poder incorporarse cambios relacionados con aspectos legales o de seguridad sin afectar todo el desarrollo.
-* La posibilidad de recibir retroalimentación constante favorece la mejora continua del producto.
+* **Interdependencia Colectiva y Conflicto de Roles:** El éxito de la plataforma depende del balance exacto entre atraer la demanda (usuarios finales que Gabriel prioriza) y asegurar la oferta (entrenadores activos que Ana gestiona). Un modelo rígido habría sepultado las necesidades de una de las partes.
+* **Severidad Regulatoria y Riesgo Patrimonial:** El tratamiento de datos biométricos sensibles (fotografías de progreso premium ilimitadas) y la recaudación automatizada de comisiones bancarias exigen que los aspectos de seguridad (cifrado, consentimientos informados explícitos por separado y KYC) sean auditados tempranamente, requiriendo un modelo capaz de priorizar la seguridad sin perder velocidad comercial.
+* **Restricciones Técnicas de Rendimiento Críticas:** Los estrictos límites de hardware y red establecidos por la ingeniería de la app (gama media-baja, latencias de red <800ms, optimización de almacenamiento mediante caché en disco limitada a los últimos 5 videos) forzaron un modelo de desarrollo que valide la viabilidad del software en incrementos constantes y controlados.
+* **Dinámica Freemium y Volatilidad del Mercado:** La necesidad de validar rápidamente si las comisiones establecidas (20% o 30%) y el valor percibido de la versión premium logran que el negocio sea financieramente viable, obligando a interactuar con feedback constante en períodos cortos de tiempo.
 
