@@ -1,7 +1,7 @@
 # Punto 3 – Modelos de Proceso
 
 **FitConnect – Trabajo Práctico Primera Etapa**  
-**Integrantes del grupo:** [Completar con los nombres de los integrantes]
+**Integrantes del grupo:** AGUSTIN CURVETTO Y SANTIAGO MENGHI
 
 ---
 
