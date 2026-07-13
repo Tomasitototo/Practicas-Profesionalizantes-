@@ -146,57 +146,47 @@ Se recomienda utilizar el **Modelo Ágil (Scrum)**, complementado con un enfoque
 
 ---
 
-## Punto 4 – Roles en el Equipo de Desarrollo
+## Punto 4 – Roles en el Equipo de Desarrollo (Versión Final Validada)
 
-### Product Owner
+Basándonos en las restricciones técnicas y estratégicas de FitConnect, y habiendo validado la estructura con el CTO y el Product Manager, el equipo de desarrollo debe contar con los siguientes roles:
 
-- **Responsabilidades principales:** Definir qué va a incluir la app, decidir qué se hace primero, pensar en las necesidades de los usuarios y revisar que el proyecto avance bien.
-- **¿Por qué es necesario para FitConnect?** Porque ayuda a que la aplicación tenga funciones útiles para quienes la van a usar.
+### 1. Líder de Proyecto / Product Manager (PM)
 
----
-
-### Coordinador del Proyecto
-
-- **Responsabilidades principales:** Repartir tareas, organizar reuniones, ayudar a resolver problemas y seguir el avance del proyecto.
-- **¿Por qué es necesario para FitConnect?** Porque mantiene el trabajo organizado durante el desarrollo.
+- **Responsabilidades principales:** Ser el nexo con la alta gerencia, traducir los objetivos del negocio (ej. lograr 15.000 usuarios y 200 entrenadores en el MVP) en prioridades claras, y proteger al equipo de distracciones para que se enfoquen en lo importante.
+- **¿Por qué es necesario para FitConnect?** Porque garantiza que el producto cumpla su objetivo comercial y se asegure de que todo el equipo entienda la necesidad del usuario (como lograr que el registro sea en menos de 3 pasos). En nuestro caso, este rol lo ocupa Gabriel.
 
 ---
 
-### Desarrollo Visual
+### 2. Desarrolladores Especializados (Mobile y Backend)
 
-- **Responsabilidades principales:** Diseñar pantallas, crear botones, menús y secciones, y hacer que la aplicación se vea clara y ordenada.
-- **¿Por qué es necesario para FitConnect?** Porque permite que la app sea fácil de usar y visualmente cómoda.
-
----
-
-### Desarrollo Interno
-
-- **Responsabilidades principales:** Guardar información, manejar perfiles y registros, organizar los datos y mantener funcionando el sistema.
-- **¿Por qué es necesario para FitConnect?** Porque hace posible que la aplicación funcione correctamente.
+- **Responsabilidades principales:** Escribir el código, pero divididos por especialidad. Los Mobile Devs se encargan de la aplicación en el celular, y el Backend Dev de la lógica en los servidores.
+- **¿Por qué es necesario para FitConnect?** Como nos confirmó el CTO (Diego), desarrolladores genéricos (full-stack) harían que la app sea lenta. Necesitamos especialistas Mobile para lograr que la app pese menos de 200MB y arranque en menos de 3 segundos, y un especialista Backend para la lógica de datos.
 
 ---
 
-### Diseño y Experiencia de Uso
+### 3. Tester / Aseguramiento de Calidad (QA)
 
-- **Responsabilidades principales:** Diseñar la apariencia general, pensar cómo se va a mover el usuario dentro de la app y hacer que sea simple y cómoda de usar.
-- **¿Por qué es necesario para FitConnect?** Porque mejora la experiencia de uso dentro de la aplicación.
-
----
-
-### Revisión y Pruebas
-
-- **Responsabilidades principales:** Probar funciones, buscar errores y revisar que todo responda bien.
-- **¿Por qué es necesario para FitConnect?** Porque ayuda a detectar fallas antes de que la aplicación llegue al usuario.
+- **Responsabilidades principales:** Crear pruebas automatizadas desde el día uno y hacer regresiones constantes para evitar deudas técnicas, probando la app para encontrar fallas.
+- **¿Por qué es necesario para FitConnect?** Es vital porque funciones críticas como el módulo de seguimiento de métricas y récords personales no pueden fallar; si fallan, usuarios activos como Enzo abandonan la app al tercer día.
 
 ---
 
-### Preguntas sobre los roles
+### 4. DevOps y SRE (Site Reliability Engineer)
 
-**¿Los roles irán rotando durante el proceso de desarrollo de FitConnect?**
-No, los roles no irán rotando durante el desarrollo de FitConnect ya que cada integrante mantiene su función principal porque cada rol tiene tareas específicas y eso ayuda a que el trabajo sea más ordenado.
+- **Responsabilidades principales:** Automatizar procesos, gestionar la infraestructura en la nube y ser los dueños de las alertas para responder rápido si el sistema se cae.
+- **¿Por qué es necesario para FitConnect?** FitConnect exige un 99.5% de tiempo en línea (uptime) y soportar videollamadas entre entrenadores y alumnos. Una sola persona no alcanza, por lo que Diego (CTO/DevOps) necesita estar acompañado de un SRE dedicado exclusivamente a mantener la infraestructura estable.
 
-**¿Quién representa al cliente o stakeholder?**
-Lo representa el **Product Owner**, ya que es quien se encarga de pensar qué necesita el usuario y transmitir esas necesidades al equipo de desarrollo.
+---
+
+### Respuestas a las preguntas de justificación
+
+**¿Los roles irán rotando durante el proceso de desarrollo de FitConnect o no? Justifica tu respuesta.**
+Técnicamente no rotarán, ya que los roles requieren una altísima especialización (un desarrollador Backend no puede rotar a Mobile porque la app se volvería lenta, ni a DevOps por la complejidad técnica). Sin embargo, como nos exigió Gabriel (PM), existe una condición innegociable: aunque los roles técnicos sean fijos, la visión sobre el usuario debe ser compartida. Nadie puede encerrarse exclusivamente en su especialidad (código o servidores) perdiendo de vista qué necesita el usuario final. Todo el equipo debe entender el flujo del cliente.
+
+**¿Quién representa al cliente/stakeholder?**
+Al ser un marketplace, FitConnect tiene clientes en ambos extremos de la plataforma, por lo que están representados por dos personas:
+- **Por la demanda (los deportistas):** Enzo, el usuario activo. Es la voz del cliente que usará la app para entrenar y asegura que las funciones (como el botón de "20 minutos") realmente sirvan para no entrenar a ciegas.
+- **Por la oferta (los profesionales):** Ana, la Head de Entrenadores. Representa a los coaches que pondrán su reputación en la app, asegurando que se construyan herramientas útiles para que no abandonen la plataforma.
 
 **¿Quién representa a la alta gerencia de la empresa que desarrolla FitConnect?**
-Lo representa el **Coordinador del proyecto**, que es quien se ocupa de organizar al equipo, seguir el avance del trabajo y controlar que el proyecto avance correctamente.
+Este rol lo ocupa Gabriel, el Product Manager. Como él mismo nos confirmó, es su trabajo natural ser el nexo indiscutible con la gerencia, traduciendo las metas comerciales en tareas concretas para el equipo de desarrollo.
