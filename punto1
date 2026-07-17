@@ -1,31 +1,26 @@
-Conocimiento Cientifico: Fisiología del Ejercicio
+Conocimiento: Fisiología del Ejercicio Aplicada a la Calistenia.
+Tipo: Científico.
+Obtención: Se obtendría mediante la consulta directa con expertos en rendimiento físico (como Ana, Head de Entrenadores) y la investigación en literatura científica sobre entrenamiento de fuerza con peso corporal.
+Etapa(s) del proceso: Definición y Desarrollo.
+Beneficio: Este conocimiento permite establecer las "reglas de negocio" biológicas del sistema. Es vital para programar algoritmos que respeten límites de progresión (máximo 15% semanal), garanticen el descanso muscular (48 hs) y validen prerrequisitos antes de avanzar a ejercicios complejos. Esto asegura la calidad y seguridad del producto, evitando lesiones en los usuarios.
 
--Obtencion: Se obtuvo mediante la búsqueda de información en libros, artículos especializados y consultas a profesionales del deporte y la nutrición.
+Conocimiento: Psicología de la Motivación y Gamificación.
+Tipo: Científico.
+Obtención: A través del estudio de modelos de comportamiento del usuario en entornos digitales y técnicas de retención en aplicaciones móviles.
+Etapa(s) del proceso: Definición.
+Beneficio: Es clave para diseñar el modelo freemium y fomentar la comunidad. Este conocimiento permite definir sistemas de rachas, medallas y desafíos grupales que combaten el abandono del usuario después de las primeras 3 semanas. Ayuda a transformar la aplicación en una experiencia social y competitiva, resolviendo la falta de motivación que suele ocurrir en el entrenamiento solitario.
 
--Etapas del proceso: Definición y Desarrollo.
+Conocimiento: Arquitectura de Microservicios y API Gateway.
+Tipo: Técnico.
+Obtención: Cursos de arquitectura de sistemas escalables, documentación técnica sobre servicios en la nube y consulta con especialistas en infraestructura (Diego, CTO).
+Etapa(s) del proceso: Definición y Desarrollo.
+Beneficio: Proporciona al sistema un uptime del 99.5% y alta mantenibilidad. Esta estructura permite actualizar módulos independientes (como el chat o el marketplace) sin afectar el resto del sistema. Además, el uso de un API Gateway facilita que la aplicación cargue rápido al centralizar el acceso a los datos, optimizando el rendimiento en dispositivos de gama media-baja.
 
--Beneficio: Gracias a este conocimiento, la aplicación puede ofrecer rutinas más seguras y adaptadas a cada usuario, mejorando la efectividad de los entrenamientos y generando mayor confianza en FitConnect.
+Conocimiento: Seguridad de la Información y Protección de Datos Sensibles.
+Tipo: Técnico.
+Obtención: Capacitaciones en normativas de privacidad y protocolos de ciberseguridad para el manejo de datos de salud y fotos.
+Etapa(s) del proceso: Desarrollo y Prueba.
+Beneficio: Mitiga riesgos legales críticos relacionados con la privacidad. Este conocimiento permite implementar el cifrado de fotos de progreso, sistemas de consentimiento explícito y protocolos de borrado definitivo de datos personales tras 30 días de inactividad. Esto protege la confianza del usuario y asegura que la empresa cumpla con estándares legales desde el diseño.
 
-Conocimiento Cientifico: Psicología de la Motivación
-
--Obtencion: Se obtuvo investigando sobre comportamiento de los usuarios y técnicas de motivación utilizadas en aplicaciones y plataformas digitales.
-
--Etapas del proceso: Definición y Diseño.
-
--Beneficio: Permite crear sistemas de recompensas, desafíos y objetivos que ayudan a que los usuarios mantengan la constancia y se sientan más motivados a seguir entrenando.
-
-Conocimiento Tecnico: Arquitectura de Microservicios
-
--Obtencion: Este conocimiento se obtuvo a través de cursos relacionados con ingeniería de software, investigación sobre servicios en la nube y práctica en el desarrollo de aplicaciones.
-
--Etapas del proceso: Definición y Desarrollo.
-
--Beneficio: Permite organizar la plataforma en distintos servicios independientes, logrando que el sistema sea más estable y pueda soportar una gran cantidad de usuarios conectados al mismo tiempo sin presentar fallas.
-
-Conocimiento Tecnico: Seguridad de la Información
-      
--Obtencion: Se obtuvo mediante capacitaciones en ciberseguridad y el estudio de normas de protección de datos y privacidad.
-
--Etapas del proceso: Desarrollo y Prueba.
 
 -Beneficio: Ayuda a proteger la información personal y los datos de salud de los usuarios, asegurando que estén resguardados correctamente y evitando problemas legales o pérdida de confianza en la plataforma.
