@@ -1,0 +1,53 @@
+# Análisis de Stakeholders y Definición del MVP - FitConnect
+
+Este documento detalla los objetivos, restricciones y conflictos de los interesados del proyecto, justificando técnicamente el alcance del Producto Mínimo Viable (MVP) en base a los modelos de proceso evaluados.
+
+---
+
+## 1. Objetivos y Restricciones de los Interesados
+
+* **Gabriel — Product Manager**
+  * **Objetivo:** Maximizar la conversión inicial y reducir la deserción temprana (churn) en el mercado fitness.
+  * **Restricción:** El onboarding y la configuración inicial deben completarse en un máximo de "3 taps".
+
+* **Ana — Head de Entrenadores**
+  * **Objetivo:** Garantizar la calidad del contenido y la fidelización de los profesionales de la salud y el entrenamiento.
+  * **Restricción:** Disponibilidad de herramientas estructuradas (plantillas y administración de rutinas) para evitar contenido genérico.
+
+* **Diego — CTO**
+  * **Objetivo:** Asegurar la viabilidad técnica, estabilidad y alta disponibilidad de la infraestructura.
+  * **Restricciones:** Instalador APK < 200MB, tiempo de arranque inicial < 3s, arquitectura de streaming CDN mediante protocolos HLS/DASH, y un objetivo mandatorio de 99.5% de uptime.
+
+* **Mara — Legal**
+  * **Objetivo:** Minimizar la exposición patrimonial, civil y regulatoria de la organización.
+  * **Restricciones:** Cumplimiento estricto de las normativas GDPR y HIPAA para el tratamiento de datos sensibles (fotografías de progreso premium).
+
+---
+
+## 2. Matriz de Impacto de Conflictos Técnicos
+
+* **Conflicto de Producto (Gabriel vs Ana):** Priorizar un registro veloz postergando el panel de entrenadores genera un riesgo estimado de abandono del 85% por parte de los profesionales, dejando la plataforma sin oferta de contenido.
+* **Conflicto Regulatorio (Gabriel vs Mara):** Omitir pasos de validación legal para evitar fricción en el registro expone al proyecto a penalizaciones económicas y al bloqueo total del lanzamiento.
+* **Conflicto de Rendimiento (Diego vs Product):** Cargar la aplicación con videos embebidos y arquitecturas pesadas compromete los límites técnicos de memoria y forzará una reingeniería de código costosa.
+
+---
+
+## 3. Criterios de Aceptación Técnicos del MVP (Sprint 1)
+
+Para resolver las discrepancias sin añadir burocracia organizativa, se establecen métricas duras de ingeniería para el código entregado:
+
+* **Métrica de Interfaz:** Verificación mediante pruebas de caja negra de que el flujo crítico de registro e inicio de actividad se realiza en un máximo de 3 taps, incluyendo la aceptación de términos legales.
+* **Métrica de Contenido Mínimo:** Los entrenadores deben disponer de al menos 3 plantillas estáticas de rutinas preconfiguradas para asegurar la oferta inicial de valor sin recurrir a un módulo drag-and-drop complejo.
+* **Métrica de Rendimiento de Infraestructura:** Pruebas automatizadas en el pipeline de integración que bloqueen el despliegue si la APK supera los 200MB o si el tiempo de carga en frío es superior a 3 segundos.
+* **Métrica de Seguridad:** Cifrado obligatorio en tránsito (TLS 1.3) y en reposo (AES-256) para el almacenamiento de imágenes en el servidor, con flujos opt-in independientes.
+
+---
+
+## 4. Conclusión Técnica y Justificación del MVP
+
+La conformación de este alcance no es arbitraria, sino el resultado directo de cruzar las restricciones innegociables de la organización con las ventajas analizadas en los Modelos de Proceso del proyecto.
+
+Se adopta un **Modelo de Ciclo de Vida Incremental** debido a que permite aislar el flujo de onboarding exigido por Producto para cumplir con los plazos del mercado. Al mismo tiempo, este enfoque modular otorga las ventanas de tiempo técnicas necesarias entre cada incremento para que el área de arquitectura evalúe el impacto real en memoria de la APK y valide el streaming adaptativo antes de expandir el sistema a gran escala.
+
+Este enfoque de ingeniería garantiza que cada componente liberado sea técnicamente viable, legalmente seguro y comercialmente competitivo.
+
