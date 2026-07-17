@@ -1,0 +1,79 @@
+PUNTO 1:
+Conocimiento: Fisiología del Ejercicio Aplicada a la Calistenia.
+Tipo: Científico.
+Obtención: Se obtendría mediante la consulta directa con expertos en rendimiento físico (como Ana, Head de Entrenadores) y la investigación en literatura científica sobre entrenamiento de fuerza con peso corporal.
+Etapa(s) del proceso: Definición y Desarrollo.
+Beneficio: Este conocimiento permite establecer las "reglas de negocio" biológicas del sistema. Es vital para programar algoritmos que respeten límites de progresión (máximo 15% semanal), garanticen el descanso muscular (48 hs) y validen prerrequisitos antes de avanzar a ejercicios complejos. Esto asegura la calidad y seguridad del producto, evitando lesiones en los usuarios.
+
+Conocimiento: Psicología de la Motivación y Gamificación.
+Tipo: Científico.
+Obtención: A través del estudio de modelos de comportamiento del usuario en entornos digitales y técnicas de retención en aplicaciones móviles.
+Etapa(s) del proceso: Definición.
+Beneficio: Es clave para diseñar el modelo freemium y fomentar la comunidad. Este conocimiento permite definir sistemas de rachas, medallas y desafíos grupales que combaten el abandono del usuario después de las primeras 3 semanas. Ayuda a transformar la aplicación en una experiencia social y competitiva, resolviendo la falta de motivación que suele ocurrir en el entrenamiento solitario.
+
+Conocimiento: Arquitectura de Microservicios y API Gateway.
+Tipo: Técnico.
+Obtención: Cursos de arquitectura de sistemas escalables, documentación técnica sobre servicios en la nube y consulta con especialistas en infraestructura (Diego, CTO).
+Etapa(s) del proceso: Definición y Desarrollo.
+Beneficio: Proporciona al sistema un uptime del 99.5% y alta mantenibilidad. Esta estructura permite actualizar módulos independientes (como el chat o el marketplace) sin afectar el resto del sistema. Además, el uso de un API Gateway facilita que la aplicación cargue rápido al centralizar el acceso a los datos, optimizando el rendimiento en dispositivos de gama media-baja.
+
+Conocimiento: Seguridad de la Información y Protección de Datos Sensibles.
+Tipo: Técnico.
+Obtención: Capacitaciones en normativas de privacidad y protocolos de ciberseguridad para el manejo de datos de salud y fotos.
+Etapa(s) del proceso: Desarrollo y Prueba.
+Beneficio: Mitiga riesgos legales críticos relacionados con la privacidad. Este conocimiento permite implementar el cifrado de fotos de progreso, sistemas de consentimiento explícito y protocolos de borrado definitivo de datos personales tras 30 días de inactividad. Esto protege la confianza del usuario y asegura que la empresa cumpla con estándares legales desde el diseño.
+
+
+-Beneficio: Ayuda a proteger la información personal y los datos de salud de los usuarios, asegurando que estén resguardados correctamente y evitando problemas legales o pérdida de confianza en la plataforma.
+
+PUNTO 2:
+2. Identificación de Problemas
+
+Problema 1: Lo difícil y caro que es empezar a entrenar.
+¿A quién afecta este problema? A personas que quieren empezar a hacer ejercicio pero se ven frenadas porque los gimnasios son caros, no tienen máquinas en sus casas, o les da pereza navegar por menús complicados en otras aplicaciones.
+¿Cómo FitConnect resuelve este problema? Ofreciendo un modelo gratuito (freemium) enfocado en la calistenia (sin gastar plata ni máquinas). Además, permite empezar súper rápido con un modo "hoy 20 minutos": un botón gigante que le tira al usuario una rutina corta instantánea, sin tener que armarla ni navegar por la app.
+Nivel de impacto/importancia: 1 (Más importante)
+
+Problema 2: Estancarse, perder la motivación y el miedo a lesionarse por entrenar solo.
+¿A quién afecta este problema? A los usuarios que ya entrenan por su cuenta (como Enzo, el usuario activo) pero sienten que no avanzan o tienen miedo de hacer los ejercicios mal y romperse al no tener una guía que los cuide.
+¿Cómo FitConnect resuelve este problema? Teniendo un sistema de seguimiento que incluye: un contador manual de repeticiones súper simple (un botón por cada repetición, sin cámaras raras), gráficos de avance por mes para ver el progreso real, y un sistema de prevención de lesiones que le avisa al usuario si está haciendo más esfuerzo del que aguanta, basándose en un reporte rápido de cómo se siente.
+Nivel de impacto/importancia: 2
+
+Problema 3: El caos y la desorganización de los entrenadores para manejar a sus alumnos a distancia.
+¿A quién afecta este problema? A los entrenadores que consiguen alumnos, pero se frustran intentando armarles rutinas en Excel o siguiéndolos por WhatsApp. Si no tienen una herramienta de trabajo seria, abandonan la plataforma (la meta es retener al menos al 85% de los profes).
+¿Cómo FitConnect resuelve este problema? Dándoles un panel de control súper ágil y completo. Incluye plantillas visuales fáciles de armar y duplicar, una pantalla para ver el progreso de cada alumno y ajustarle los pesos ahí mismo, y reglas claras de monetización: comisiones del 20-30% con un sistema de calificación (rating) obligatorio para que puedan construir su reputación y saber cuánto ganan.
+Nivel de impacto/importancia: 3 (Menos importante)
+
+¿Por qué ordenaron estos problemas en ese nivel de impacto/importancia? Ordenamos los problemas en tres niveles basados en la estrategia del negocio: captar → retener → organizar oferta. El Nivel 1 es atraer a la gente: si no eliminamos las barreras de entrada (que sea gratis y tenga un botón rápido para entrenar ya mismo), no hay usuarios. El Nivel 2 es retenerlos: si el usuario entra pero tiene miedo de lesionarse o no ve su progreso mensual en un gráfico, abandona rápido. Finalmente, el Nivel 3 quedó último porque primero necesitamos atraer a esa masa de usuarios; una vez que estén, organizamos a los entrenadores dándoles un panel de trabajo tan completo y transparente que garantice que se queden en la plataforma y no se vayan a la competencia.
+
+¿En qué basan su criterio de priorización? Nos basamos en los conceptos de la Etapa 0 del Proceso Ingenieril (Identificación del Problema). La teoría dice que hay que enfocarse en definir el verdadero "dolor o necesidad" del cliente para validar que el proyecto vale la pena. Para lograrlo no inventamos los problemas, sino que fuimos a validarlos con los stakeholders (usuarios y entrenadores). Además, le presentamos nuestro criterio de "captar usuarios primero, retenerlos después y organizar a los profes al final" al Product Manager del proyecto (Gabriel), quien nos dio su aprobación definitiva asegurando que este orden está perfectamente alineado con la visión estratégica de la aplicación.
+
+PUNTO 4:
+4. Roles en el Equipo de Desarrollo (Versión Final Validada)
+Basándonos en las restricciones técnicas y estratégicas de FitConnect, y habiendo validado la estructura con el CTO y el Product Manager, el equipo de desarrollo debe contar con los siguientes roles:
+
+1. Nombre del rol: Líder de Proyecto / Product Manager (PM)
+Responsabilidades principales: Ser el nexo con la alta gerencia, traducir los objetivos del negocio (ej. lograr 15.000 usuarios y 200 entrenadores en el MVP) en prioridades claras, y proteger al equipo de distracciones para que se enfoquen en lo importante.
+¿Por qué es necesario para FitConnect? Porque garantiza que el producto cumpla su objetivo comercial y se asegure de que todo el equipo entienda la necesidad del usuario (como lograr que el registro sea en menos de 3 pasos). En nuestro caso, este rol lo ocupa Gabriel.
+
+2. Nombre del rol: Desarrolladores Especializados (Mobile y Backend)
+Responsabilidades principales: Escribir el código, pero divididos por especialidad. Los Mobile Devs se encargan de la aplicación en el celular, y el Backend Dev de la lógica en los servidores.
+¿Por qué es necesario para FitConnect? Como nos confirmó el CTO (Diego), desarrolladores genéricos (full-stack) harían que la app sea lenta. Necesitamos especialistas Mobile para lograr que la app pese menos de 200MB y arranque en menos de 3 segundos, y un especialista Backend para la lógica de datos.
+
+3. Nombre del rol: Tester / Aseguramiento de Calidad (QA)
+Responsabilidades principales: Crear pruebas automatizadas desde el día uno y hacer regresiones constantes para evitar deudas técnicas, probando la app para encontrar fallas.
+¿Por qué es necesario para FitConnect? Es vital porque funciones críticas como el módulo de seguimiento de métricas y récords personales no pueden fallar; si fallan, usuarios activos como Enzo abandonan la app al tercer día.
+
+4. Nombre del rol: DevOps y SRE (Site Reliability Engineer)
+Responsabilidades principales: Automatizar procesos, gestionar la infraestructura en la nube y ser los dueños de las alertas para responder rápido si el sistema se cae.
+¿Por qué es necesario para FitConnect? FitConnect exige un 99.5% de tiempo en línea (uptime) y soportar videollamadas entre entrenadores y alumnos. Una sola persona no alcanza, por lo que Diego (CTO/DevOps) necesita estar acompañado de un SRE dedicado exclusivamente a mantener la infraestructura estable.
+
+Respuestas a las preguntas de justificación:
+
+¿Los roles irán rotando durante el proceso de desarrollo de FitConnect o no? Justifica tu respuesta. Técnicamente no rotarán, ya que los roles requieren una altísima especialización (un desarrollador Backend no puede rotar a Mobile porque la app se volvería lenta, ni a DevOps por la complejidad técnica). Sin embargo, como nos exigió Gabriel (PM), existe una condición innegociable: aunque los roles técnicos sean fijos, la visión sobre el usuario debe ser compartida. Nadie puede encerrarse exclusivamente en su especialidad (código o servidores) perdiendo de vista qué necesita el usuario final. Todo el equipo debe entender el flujo del cliente.
+
+¿Quién representa al cliente/stakeholder? Al ser un marketplace, FitConnect tiene clientes en ambos extremos de la plataforma, por lo que están representados por dos personas:
+Por la demanda (los deportistas): Enzo, el usuario activo. Es la voz del cliente que usará la app para entrenar y asegura que las funciones (como el botón de "20 minutos") realmente sirvan para no entrenar a ciegas.
+Por la oferta (los profesionales): Ana, la Head de Entrenadores. Representa a los coaches que pondrán su reputación en la app, asegurando que se construyan herramientas útiles para que no abandonen la plataforma.
+
+¿Quién representa a la alta gerencia de la empresa que desarrolla FitConnect? Este rol lo ocupa Gabriel, el Product Manager. Como él mismo nos confirmó, es su trabajo natural ser el nexo indiscutible con la gerencia, traduciendo las metas comerciales en tareas concretas para el equipo de desarrollo.
