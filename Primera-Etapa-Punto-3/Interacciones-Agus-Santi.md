@@ -1,5 +1,5 @@
 Santino - **FitConnect – Trabajo Práctico Primera Etapa**  
-Santino - **Integrantes del grupo:** [Completar con los nombres de los integrantes] 
+Santino  
 Agus - # Análisis Comparativo de los Modelos de Proceso Aplicados a FitConnect
 Agus - A continuación, se evalúan los distintos modelos de proceso de ingeniería de software, detallando sus ventajas y desventajas específicas frente a las necesidades técnicas, de negocio y legales del proyecto FitConnect.
 Santino - ## 1. Modelo Cascada
