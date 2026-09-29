@@ -1,0 +1,31 @@
+7. Atributos de Calidad
+
+1. Usabilidad
+Atributo identificado: Facilidad de aprendizaje y de uso (la aplicación debe ser intuitiva para personas sin conocimientos técnicos).
+Justificación del enunciado: FitConnect está pensada para un público muy amplio, desde personas que recién empiezan a entrenar hasta deportistas avanzados. Además, los usuarios registran sus entrenamientos durante o inmediatamente después de la actividad física, generalmente desde el celular y con poco tiempo disponible. Esto exige una interfaz simple y con pocos pasos.
+¿Por qué es importante para FitConnect? Si registrar un entrenamiento o reservar una sesión resulta complicado, los usuarios abandonarán la aplicación. Como el objetivo del negocio es mejorar la adherencia al entrenamiento, una buena usabilidad influye directamente en la retención de usuarios y en el éxito del producto.
+
+2. Eficiencia (Performance)
+Atributo identificado: Tiempo de respuesta del sistema.
+Justificación del enunciado: La plataforma maneja consultas frecuentes (ver rutinas, cargar entrenamientos, consultar gráficos de progreso) y reservas de horarios que pueden ser solicitadas por muchos usuarios al mismo tiempo, sobre todo en horarios pico (a la mañana temprano y a la tarde-noche).
+¿Por qué es importante para FitConnect? Los usuarios utilizan la aplicación en momentos puntuales y esperan respuestas inmediatas. Además, en las reservas, un sistema lento puede provocar conflictos como dos personas intentando tomar el mismo horario. Un buen desempeño mejora la experiencia y evita errores en operaciones críticas.
+
+3. Mantenibilidad
+Atributo identificado: Modificabilidad (facilidad para agregar o cambiar funcionalidades).
+Justificación del enunciado: Al ser una plataforma en crecimiento, es esperable que se incorporen nuevas funciones con el tiempo (nuevos tipos de planes, integración con dispositivos como relojes inteligentes, nuevas métricas de progreso, etc.), así como cambios en los medios de pago o en las reglas de negocio.
+¿Por qué es importante para FitConnect? Si el sistema no está bien organizado, cada cambio resultará costoso y podría generar errores en otras partes. Una arquitectura modular y un código ordenado permiten evolucionar el producto rápidamente y con menor costo, lo que es clave para adaptarse a las necesidades del mercado.
+
+4. Portabilidad
+Atributo identificado: Adaptabilidad a distintas plataformas y dispositivos.
+Justificación del enunciado: Los usuarios acceden a FitConnect desde distintos dispositivos: celulares Android e iOS, tablets y computadoras. Los entrenadores, por su parte, suelen gestionar sus alumnos y agendas desde la web.
+¿Por qué es importante para FitConnect? Si la aplicación solo funcionara en una plataforma, se perdería una parte importante de los usuarios potenciales. Garantizar que funcione correctamente en diferentes sistemas operativos y navegadores amplía el alcance del proyecto y permite que cada usuario elija el dispositivo que le resulte más cómodo.
+
+5. Seguridad
+Atributo identificado: Confidencialidad e integridad de los datos personales y de pago.
+Justificación del enunciado: El sistema almacena información sensible: datos personales, medidas corporales, información de salud, conversaciones con entrenadores y datos vinculados a pagos. Además, existen distintos roles (usuario, entrenador, administrador) con diferentes permisos de acceso.
+¿Por qué es importante para FitConnect? Una filtración de datos afectaría la privacidad de los usuarios, dañaría la reputación de la plataforma y podría generar sanciones legales (Ley 25.326 de Protección de Datos Personales). Por eso es fundamental proteger la información mediante autenticación, cifrado, control de acceso por roles y comunicación segura (HTTPS).
+
+
+
+
+
