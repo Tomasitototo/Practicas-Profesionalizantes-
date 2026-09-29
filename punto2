@@ -80,7 +80,7 @@ El pago debe realizarse a través de una pasarela de pagos externa, sin almacena
 Una vez confirmado el pago, el sistema debe activar el plan y enviar un comprobante por correo.
 
 
-b) Requisitos No Funcionales (Calidad)
+b) Requisitos No Funcionales 
 ID	Atributo	Descripción
 RNF-01	Usabilidad	La interfaz debe ser intuitiva, de modo que un usuario nuevo pueda registrar su primer entrenamiento en menos de 3 minutos sin necesidad de ayuda. Debe mantener una navegación consistente en todas las pantallas.
 RNF-02	Performance	Las consultas y acciones habituales (ver rutina, registrar entrenamiento, ver progreso) deben responder en menos de 3 segundos, incluso con 1.000 usuarios concurrentes.
