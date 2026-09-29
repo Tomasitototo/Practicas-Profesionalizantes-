@@ -1,0 +1,113 @@
+2. Identificación de Requisitos
+a) Requisitos Funcionales (Historias de Usuario)
+RF-01: Registro e inicio de sesión
+
+Como usuario nuevo
+Quiero crear una cuenta e iniciar sesión en la plataforma
+Para acceder a mis rutinas, mi progreso y los servicios de FitConnect de forma personalizada.
+
+Criterios de aceptación:
+
+El sistema debe solicitar como mínimo nombre, correo electrónico, contraseña y rol (usuario o entrenador).
+El sistema debe validar que el correo no esté registrado previamente y que la contraseña cumpla con un mínimo de 8 caracteres.
+Luego del registro, el sistema debe enviar un correo de confirmación y permitir el inicio de sesión una vez verificada la cuenta.
+RF-02: Creación y asignación de rutinas personalizadas
+
+Como entrenador
+Quiero crear una rutina de ejercicios y asignarla a uno de mis alumnos
+Para que el alumno entrene según sus objetivos y su nivel físico.
+
+Criterios de aceptación:
+
+El entrenador debe poder seleccionar ejercicios de un catálogo e indicar series, repeticiones, descanso y días de la semana.
+El entrenador solo puede asignar rutinas a alumnos vinculados a su cuenta.
+El alumno debe recibir una notificación cuando se le asigne o modifique una rutina y poder visualizarla desde su perfil.
+RF-03: Registro de entrenamientos realizados
+
+Como usuario
+Quiero registrar los ejercicios, series, repeticiones y pesos que realicé en cada sesión
+Para llevar un control de mi actividad física y de mi evolución.
+
+Criterios de aceptación:
+
+El usuario debe poder registrar un entrenamiento a partir de una rutina asignada o de forma libre.
+El sistema debe guardar la fecha, la duración y los datos de cada ejercicio realizado.
+El sistema debe permitir editar un registro dentro de las 24 horas posteriores a su carga.
+RF-04: Visualización del progreso
+
+Como usuario
+Quiero ver gráficos y estadísticas de mi progreso (peso corporal, cargas, frecuencia de entrenamiento)
+Para saber si estoy cumpliendo mis objetivos y motivarme a continuar.
+
+Criterios de aceptación:
+
+El sistema debe mostrar la evolución de las métricas en gráficos filtrables por semana, mes o año.
+El usuario debe poder cargar sus medidas corporales (peso, altura, porcentaje de grasa, etc.) y ver su historial.
+El sistema debe permitir que el entrenador vinculado consulte el progreso del alumno, siempre que el alumno lo autorice.
+RF-05: Reserva de sesiones con entrenadores
+
+Como usuario
+Quiero reservar una sesión con un entrenador en un día y horario disponible
+Para recibir asesoramiento personalizado sin tener que coordinar por otros medios.
+
+Criterios de aceptación:
+
+El sistema debe mostrar únicamente los horarios disponibles del entrenador seleccionado.
+El sistema debe evitar que dos usuarios reserven el mismo horario (no permitir doble reserva).
+Al confirmar la reserva, tanto el usuario como el entrenador deben recibir una notificación con los detalles.
+El usuario debe poder cancelar la reserva hasta 24 horas antes del horario pactado.
+RF-06: Comunicación entre usuario y entrenador
+
+Como usuario
+Quiero enviar mensajes a mi entrenador dentro de la aplicación
+Para resolver dudas sobre mis rutinas y recibir seguimiento.
+
+Criterios de aceptación:
+
+Solo pueden intercambiar mensajes un usuario y un entrenador que estén vinculados.
+Los mensajes deben mostrarse con fecha y hora, y guardarse en un historial de conversación.
+El destinatario debe recibir una notificación cuando le llegue un mensaje nuevo.
+RF-07: Gestión de suscripción y pagos
+
+Como usuario
+Quiero contratar y pagar un plan de suscripción desde la aplicación
+Para acceder a las funcionalidades completas de FitConnect.
+
+Criterios de aceptación:
+
+El sistema debe mostrar los planes disponibles con su precio y beneficios.
+El pago debe realizarse a través de una pasarela de pagos externa, sin almacenar los datos completos de la tarjeta en el sistema.
+Una vez confirmado el pago, el sistema debe activar el plan y enviar un comprobante por correo.
+
+
+b) Requisitos No Funcionales (Calidad)
+ID	Atributo	Descripción
+RNF-01	Usabilidad	La interfaz debe ser intuitiva, de modo que un usuario nuevo pueda registrar su primer entrenamiento en menos de 3 minutos sin necesidad de ayuda. Debe mantener una navegación consistente en todas las pantallas.
+RNF-02	Performance	Las consultas y acciones habituales (ver rutina, registrar entrenamiento, ver progreso) deben responder en menos de 3 segundos, incluso con 1.000 usuarios concurrentes.
+RNF-03	Seguridad	Las contraseñas deben almacenarse cifradas (hash), toda comunicación debe realizarse mediante HTTPS y el acceso a los datos debe controlarse por roles (usuario, entrenador, administrador).
+RNF-04	Disponibilidad	El sistema debe estar disponible al menos el 99% del tiempo mensual, con mantenimientos programados fuera de los horarios de mayor uso.
+RNF-05	Portabilidad	La aplicación debe funcionar correctamente en Android, iOS y en los navegadores web más utilizados (Chrome, Firefox, Safari y Edge).
+c) Restricciones
+ID	Tipo	Descripción
+RS-01	Legal	El sistema debe cumplir con la Ley 25.326 de Protección de Datos Personales de la República Argentina, ya que almacena datos sensibles como información de salud y medidas corporales. Se debe obtener el consentimiento explícito del usuario para el tratamiento de sus datos.
+RS-02	Técnica	Los pagos deben procesarse exclusivamente mediante una pasarela de pagos de terceros (por ejemplo, Mercado Pago), por lo que el sistema depende de su disponibilidad y de sus condiciones de uso.
+RS-03	De negocio	El desarrollo de la primera versión debe completarse dentro del plazo y presupuesto definidos por el equipo, por lo que se deben priorizar las funcionalidades esenciales.
+d) Requerimientos de Negocio
+ID	Descripción
+RN-01	FitConnect busca facilitar el vínculo entre personas que quieren entrenar y profesionales del fitness, digitalizando el seguimiento de rutinas y progreso para mejorar la adherencia al entrenamiento.
+RN-02	La plataforma debe generar ingresos sostenibles mediante planes de suscripción para usuarios y comisiones por las sesiones reservadas con entrenadores.
+RN-03	El sistema debe permitir escalar la cantidad de usuarios y entrenadores registrados, para poder expandirse a otras ciudades o países en el futuro.
+e) Requisitos Técnicos
+ID	Descripción
+RT-01	El backend debe exponer sus servicios mediante una API REST con intercambio de datos en formato JSON, de modo que pueda ser consumida tanto por la aplicación móvil como por la web.
+RT-02	Los datos deben almacenarse en una base de datos relacional (por ejemplo, PostgreSQL o MySQL) que garantice integridad referencial y transacciones.
+RT-03	La autenticación debe implementarse con tokens (por ejemplo, JWT), con expiración de sesión y cifrado de contraseñas con un algoritmo seguro como bcrypt.
+RT-04	El sistema debe integrarse con un servicio de envío de correos y notificaciones push para las confirmaciones, avisos de reserva y mensajes.
+RT-05	El código debe versionarse con Git y contar con pruebas automatizadas para las funcionalidades críticas.
+f) Requisitos de Infraestructura
+ID	Descripción
+RI-01	El sistema debe alojarse en un servidor en la nube (por ejemplo, AWS, Azure o Google Cloud) con capacidad de escalado según la demanda.
+RI-02	Se debe contar con copias de seguridad (backups) automáticas y periódicas de la base de datos, con almacenamiento en una ubicación distinta al servidor principal.
+RI-03	Se debe utilizar un certificado SSL/TLS vigente y un servicio de almacenamiento para archivos multimedia (videos e imágenes de ejercicios), preferentemente con una red de distribución de contenido (CDN).
+
+
