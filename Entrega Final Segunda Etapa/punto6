@@ -1,336 +1,333 @@
 ## 1. Qué información debe conservar FitConnect
 
-Persistir no significa guardar todo, sino conservar lo que tiene valor para el negocio, para funciones futuras o para las reglas del sistema. Para cada funcionalidad del enunciado se identificó qué datos deben sobrevivir después de cerrar la pantalla.
+Cuando una función se ejecuta, ¿qué información necesitamos conservar para que el sistema pueda cumplirla mañana, consultarla después o demostrar que ocurrió?
+
+Persistir no significa guardar todo. Significa conservar lo que tiene valor para FitConnect, para sus funciones futuras o para sus reglas.
+
+### Paso 1: separar acciones y datos
+
+Tomamos tres funcionalidades del enunciado y distinguimos acción, datos de entrada, datos de estado, resultado y reglas.
+
+| | Registrar un entrenamiento | Contratar a un entrenador | Diseñar un programa |
+|---|---|---|---|
+| **Acción** | El usuario registra las series que hizo | El usuario contrata a un entrenador del marketplace | El entrenador arma un programa |
+| **Datos de entrada** | Usuario, ejercicio, repeticiones, peso extra, esfuerzo percibido | Usuario, entrenador, tipo de servicio | Entrenador, título, duración, ejercicios por semana y día |
+| **Datos de estado** | Programa que está siguiendo | Estado de la contratación (pendiente, activa, finalizada, cancelada) | Si el programa es gratuito o premium |
+| **Resultado** | Gráficos de volumen, récords personales, alerta de sobreesfuerzo | Confirmación y cobro, con la comisión de FitConnect | Programa disponible en la app |
+| **Reglas** | Un usuario gratuito solo accede a dos programas básicos | El precio es el que fijó el entrenador al momento de contratar | El programa dura entre 4 y 16 semanas |
+
+Ejemplo: contratar a un entrenador requiere conocer quién contrata, a qué entrenador, qué servicio, a qué precio y con qué estado queda la contratación.
+
+### Paso 2: preguntar qué debe sobrevivir
 
 | Funcionalidad del enunciado | Datos que deben persistir | Por qué |
 |---|---|---|
-| Registro de usuarios y modelo freemium | Datos de la cuenta, plan actual, consentimiento sobre datos de salud | Se necesitan en cada sesión y para cumplir lo pedido por Mara |
-| Marketplace de trainers (búsqueda por especialidad, tarifa y disponibilidad) | Perfil del entrenador: especialidad, tarifa, disponibilidad, certificación | La búsqueda necesita consultar estos datos |
-| Biblioteca de ejercicios con videos, progresiones y regresiones | Ejercicio, nivel, enlace al video, ejercicio más fácil y más difícil | Es contenido estable que se consulta constantemente |
-| Programas de 4 a 16 semanas | Programa y los ejercicios que lo componen por semana y día | El usuario lo sigue durante semanas |
-| Seguimiento con gráficos de volumen y récords personales | Cada sesión y cada serie realizada | Sin este historial no se pueden graficar el progreso ni los récords |
-| Entrenamiento con un entrenador (sesiones virtuales o planes personalizados) | Contratación entre usuario y entrenador, con su estado y precio | Es la base de la comisión que retiene FitConnect |
-| Cobros y comisión por transacción | Cada pago, con el monto y la comisión cobrada | Hay que poder demostrar qué se cobró y qué se retuvo |
-| Suscripción premium | Períodos de suscripción de cada usuario | Determina el acceso a todos los programas y al análisis avanzado |
+| Registro de usuarios y modelo freemium | Datos de la cuenta, plan actual, consentimiento sobre datos de salud | Se necesitan en cada ingreso y para cumplir lo que pide Mara |
+| Marketplace de trainers | Especialidad, tarifa, disponibilidad y certificación del entrenador | La búsqueda necesita consultarlos |
+| Biblioteca de ejercicios | Ejercicio, nivel, enlace al video, ejercicio más fácil y más difícil | Se consulta constantemente |
+| Programas de 4 a 16 semanas | Programa y los ejercicios de cada semana y día | El usuario lo sigue durante semanas |
+| Seguimiento con gráficos y récords | Cada sesión y cada serie realizada | Sin este historial no hay gráficos ni récords |
+| Entrenamiento con un entrenador | Contratación, con su estado y precio | Es la base de la comisión de FitConnect |
+| Cobros y comisión | Cada pago, con su monto y comisión | Hay que poder demostrar qué se cobró y qué se retuvo |
+| Suscripción premium | Períodos de suscripción | Define el acceso a todos los programas y al análisis avanzado |
 | Fotos de progreso | Referencia a la foto y su fecha | Es un dato sensible que exige consentimiento |
-| Calificación de entrenadores | Puntaje y comentario por cada contratación | Permite al entrenador construir reputación |
+| Calificación de entrenadores | Puntaje y comentario por contratación | Permite al entrenador construir reputación |
 
-### Clasificación de los datos
+No todo debe persistir. Son **datos temporales**, que solo sirven durante una interacción:
+- el contador de repeticiones mientras la serie está en curso, antes de guardarla;
+- los filtros de búsqueda del marketplace;
+- el video que se está reproduciendo.
 
-| Tipo | Ejemplos en FitConnect |
-|---|---|
-| Identidad | Usuario, entrenador, ejercicio, programa |
-| Estado actual | Plan del usuario (gratuito o premium), estado de una contratación (pendiente, activa, finalizada, cancelada) |
-| Hecho ocurrido | Sesión de entrenamiento realizada, serie registrada, pago realizado, calificación emitida |
-| Configuración | Ejercicios y programas de la biblioteca, tarifa del entrenador |
-| Historial | Sesiones y series pasadas, suscripciones anteriores |
-| Dato derivado | Volumen de entrenamiento, récord personal, calificación promedio de un entrenador, semana actual de un programa |
+### Paso 3: clasificar la información
 
-### Datos derivados: se calculan y no se guardan
+| Tipo | Característica | Ejemplo en FitConnect |
+|---|---|---|
+| Identidad | Permite reconocer un objeto | Usuario, entrenador, ejercicio, programa |
+| Estado actual | Describe la situación vigente | Plan del usuario (gratuito o premium), estado de una contratación |
+| Hecho ocurrido | Registra algo que pasó | Sesión realizada, serie registrada, pago, calificación |
+| Configuración | Define datos relativamente estables | Ejercicios y programas de la biblioteca, tarifa del entrenador |
+| Historial | Conserva eventos anteriores | Sesiones y series pasadas, suscripciones anteriores |
+| Dato derivado | Se calcula desde otros datos | Volumen de entrenamiento, récord personal, calificación promedio |
 
-Siguiendo la teoría, no se duplica información sin una razón concreta. Por eso no se almacenan el volumen mensual, la calificación promedio del entrenador ni el récord personal: se calculan a partir de las series y calificaciones registradas. Esto también evita que los datos queden desactualizados y mantiene liviana la base, lo que importa para los dispositivos de gama media-baja que exige Diego.
+La clasificación ayuda a no confundir el estado actual con el historial, ni un dato fuente con un dato calculado.
 
-La única copia deliberada es el precio y la comisión al momento de cada contratación y pago (ver sección 4), porque en ese caso sí se necesita conservar una fotografía histórica.
+### Datos derivados
+
+Algunos datos no se cargan: se obtienen de otros.
+- **Volumen mensual** = suma de las repeticiones registradas en el mes.
+- **Récord personal** = mayor cantidad de repeticiones de un ejercicio.
+- **Calificación promedio** = promedio de los puntajes recibidos por el entrenador.
+
+No se guardan, se calculan cada vez. No debemos duplicar información sin una razón concreta.
+
+La excepción es el **precio** y la **comisión** al momento de cada contratación y pago. Ahí sí necesitamos conservar una fotografía histórica: si el entrenador cambia su tarifa o FitConnect cambia su comisión, los cobros ya hechos no deben cambiar.
 
 ---
 
 ## 2. Modelo conceptual
 
-Entidades identificadas: **Usuario, Entrenador, Ejercicio, Programa, Sesión de entrenamiento, Serie registrada, Contratación, Suscripción, Pago, Calificación y Foto de progreso**.
+### No todo sustantivo es una entidad
 
-No todo sustantivo del enunciado es una entidad. Por ejemplo, "progresión" y "regresión" no son entidades independientes, sino relaciones entre ejercicios; "récords personales" y "gráficos" son datos derivados.
+La pregunta central es: ¿el sistema necesita reconocer y consultar este concepto por separado?
 
-Relaciones principales:
-- Un usuario realiza muchas sesiones de entrenamiento, y cada sesión registra muchas series de ejercicios.
-- Un entrenador diseña muchos programas, y un programa contiene muchos ejercicios (y un ejercicio puede estar en muchos programas).
-- Un usuario contrata a un entrenador; cada contratación se cobra mediante pagos y puede terminar en una calificación.
-- Un usuario puede tener muchas suscripciones a lo largo del tiempo y subir muchas fotos de progreso.
+- **Ejercicio:** el sistema lo identifica y consulta. Candidato fuerte a entidad.
+- **Entrenador:** tiene información propia (especialidad, tarifa). Candidato fuerte a entidad.
+- **Progresión y regresión:** no son entidades, son relaciones entre ejercicios.
+- **Récords y gráficos:** son datos derivados, no entidades.
+- **Contratación:** hecho que debe conservarse para cobrar la comisión y consultar el historial.
+
+### Entidades y atributos candidatos
+
+| Entidad | Atributos que se desprenden del relevamiento |
+|---|---|
+| Usuario | identificador, email, nombre, rol, plan, consentimiento de datos de salud |
+| Entrenador | identificador, usuario, especialidad, certificación, tarifa, disponibilidad |
+| Ejercicio | identificador, nombre, descripción, nivel, video, progresión, regresión |
+| Programa | identificador, entrenador, título, duración, si es gratuito |
+| Sesión de entrenamiento | usuario, programa, inicio, fin, esfuerzo percibido |
+| Serie registrada | sesión, ejercicio, número de serie, repeticiones, peso extra |
+| Contratación | usuario, entrenador, tipo, precio, estado, fecha |
+| Suscripción | usuario, inicio, fin |
+| Pago | contratación o suscripción, monto, comisión, fecha |
+| Calificación | contratación, puntaje, comentario |
+| Foto de progreso | usuario, archivo, fecha, consentimiento |
+
+Son candidatos, no una decisión definitiva. Las entrevistas y los casos de uso pueden agregar, quitar o redefinir atributos.
+
+### Relaciones
+
+- Un **usuario** realiza muchas **sesiones de entrenamiento**.
+- Una **sesión** registra muchas **series**.
+- Un **ejercicio** se ejecuta en muchas **series**.
+- Un **entrenador** diseña muchos **programas**.
+- Un **programa** contiene muchos **ejercicios**, y un **ejercicio** puede estar en muchos **programas**.
+- Un **usuario** puede hacer muchas **contrataciones**, y un **entrenador** puede recibir muchas.
+- Una **contratación** se cobra con uno o más **pagos** y puede tener una **calificación**.
+- Un **usuario** puede tener muchas **suscripciones** a lo largo del tiempo y subir muchas **fotos de progreso**.
+
+También hay que registrar las reglas:
+- un programa dura entre 4 y 16 semanas;
+- una contratación tiene una sola calificación;
+- un pago corresponde a una contratación o a una suscripción, nunca a las dos;
+- el usuario gratuito accede solo a los programas marcados como gratuitos.
 
 ---
 
 ## 3. Tablas y diagrama Entidad-Relación
 
-Tipos de datos usados: `INT` (número entero), `VARCHAR` (texto corto), `TEXT` (texto largo), `DECIMAL` (número con decimales), `DATE` (fecha), `DATETIME` (fecha y hora) y `BOOLEAN` (verdadero o falso). Cada tabla tiene una clave primaria (PK) numérica; las claves foráneas (FK) apuntan a la PK de otra tabla.
+Tipos de datos usados:
+
+| Tipo | Significado |
+|---|---|
+| `INT` | Número entero |
+| `VARCHAR` | Texto corto |
+| `TEXT` | Texto largo |
+| `DECIMAL` | Número con decimales |
+| `DATE` | Fecha |
+| `DATETIME` | Fecha y hora |
+| `BOOLEAN` | Sí o no |
+
+Cada tabla tiene una **clave primaria (PK)**, el dato que identifica a cada fila. Una **clave foránea (FK)** es un campo que guarda la clave primaria de otra tabla, y así las conecta.
 
 ### 3.1 `usuario`
 Guarda a todas las personas registradas, ya sean deportistas o entrenadores.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_usuario | INT | PK | Identificador |
-| email | VARCHAR | | Correo de acceso, no se repite |
-| contrasena_hash | VARCHAR | | Contraseña guardada de forma segura, nunca en texto plano |
-| nombre | VARCHAR | | Nombre visible |
-| rol | VARCHAR | | `usuario`, `entrenador` o `administrador` |
-| plan | VARCHAR | | Estado actual: `gratuito` o `premium` |
-| acepto_datos_salud | BOOLEAN | | Consentimiento explícito para tratar datos de salud |
-| fecha_registro | DATETIME | | Alta de la cuenta |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_usuario | INT | **PK** |
+| email | VARCHAR | No se repite |
+| contrasena | VARCHAR | Guardada de forma segura, nunca a la vista |
+| nombre | VARCHAR | |
+| rol | VARCHAR | Usuario, entrenador o administrador |
+| plan | VARCHAR | Estado actual: gratuito o premium |
+| acepto_datos_salud | BOOLEAN | Consentimiento que pide Mara |
+| fecha_registro | DATETIME | |
 
 ### 3.2 `entrenador`
-Datos propios de quienes ofrecen servicios en el marketplace. Se separa de `usuario` para que los deportistas no tengan campos vacíos.
+Datos de quienes ofrecen servicios en el marketplace. Se separa de `usuario` para que los deportistas no tengan campos vacíos.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_entrenador | INT | PK | Identificador |
-| id_usuario | INT | FK a `usuario` | Cuenta a la que pertenece |
-| especialidad | VARCHAR | | Usada en la búsqueda del marketplace |
-| certificacion | VARCHAR | | Título que respalda al profesional |
-| tarifa | DECIMAL | | Tarifa fijada por el propio entrenador |
-| disponibilidad | VARCHAR | | Franjas horarias, usadas en la búsqueda |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_entrenador | INT | **PK** |
+| id_usuario | INT | **FK** a `usuario` |
+| especialidad | VARCHAR | Se usa en la búsqueda |
+| certificacion | VARCHAR | |
+| tarifa | DECIMAL | La fija el propio entrenador |
+| disponibilidad | VARCHAR | Se usa en la búsqueda |
 
 ### 3.3 `ejercicio`
-Biblioteca de calistenia disponible en la versión gratuita.
+Biblioteca de calistenia, disponible en la versión gratuita.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_ejercicio | INT | PK | Identificador |
-| nombre | VARCHAR | | Por ejemplo: flexión, dominada |
-| descripcion | TEXT | | Técnica de ejecución |
-| nivel | VARCHAR | | Principiante, intermedio o avanzado |
-| url_video | VARCHAR | | Enlace al video; el video no se guarda en la base ni en la app, lo que ayuda al límite de 200 MB |
-| id_progresion | INT | FK a `ejercicio` | Variante más difícil (puede estar vacío) |
-| id_regresion | INT | FK a `ejercicio` | Variante más fácil (puede estar vacío) |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_ejercicio | INT | **PK** |
+| nombre | VARCHAR | Por ejemplo: flexión, dominada |
+| descripcion | TEXT | Técnica de ejecución |
+| nivel | VARCHAR | Principiante, intermedio o avanzado |
+| url_video | VARCHAR | Solo el enlace: el video no ocupa lugar en la app (límite de 200 MB) |
+| id_progresion | INT | **FK** a `ejercicio`: variante más difícil |
+| id_regresion | INT | **FK** a `ejercicio`: variante más fácil |
 
 ### 3.4 `programa`
-Programas estructurados de 4 a 16 semanas diseñados por entrenadores.
+Programas estructurados que diseñan los entrenadores.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_programa | INT | PK | Identificador |
-| id_entrenador | INT | FK a `entrenador` | Autor del programa |
-| titulo | VARCHAR | | Nombre del programa |
-| duracion_semanas | INT | | Entre 4 y 16, según el enunciado |
-| es_gratuito | BOOLEAN | | Los dos programas básicos gratuitos se marcan aquí |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_programa | INT | **PK** |
+| id_entrenador | INT | **FK** a `entrenador` |
+| titulo | VARCHAR | |
+| duracion_semanas | INT | Entre 4 y 16 |
+| es_gratuito | BOOLEAN | Marca los dos programas básicos gratuitos |
 
-### 3.5 `programa_ejercicio` (tabla asociativa)
-Indica qué ejercicios componen cada programa, en qué semana y día.
+### 3.5 `programa_ejercicio`
+Indica qué ejercicios forman cada programa, en qué semana y en qué día.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_programa_ejercicio | INT | PK | Identificador |
-| id_programa | INT | FK a `programa` | Programa |
-| id_ejercicio | INT | FK a `ejercicio` | Ejercicio |
-| semana | INT | | Semana del programa |
-| dia | INT | | Día de la semana |
-| series_objetivo | INT | | Series planificadas |
-| repeticiones_objetivo | INT | | Repeticiones planificadas por serie |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_programa_ejercicio | INT | **PK** |
+| id_programa | INT | **FK** a `programa` |
+| id_ejercicio | INT | **FK** a `ejercicio` |
+| semana | INT | |
+| dia | INT | |
+| series_objetivo | INT | |
+| repeticiones_objetivo | INT | |
 
 ### 3.6 `sesion_entrenamiento`
-Cada vez que un usuario entrena. Es un hecho ocurrido y forma parte del historial.
+Cada vez que un usuario entrena. Es un hecho ocurrido.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_sesion | INT | PK | Identificador |
-| id_usuario | INT | FK a `usuario` | Quién entrenó |
-| id_programa | INT | FK a `programa` | Programa seguido (vacío si fue una rutina libre) |
-| fecha_inicio | DATETIME | | Inicio de la sesión |
-| fecha_fin | DATETIME | | Fin de la sesión |
-| esfuerzo_percibido | INT | | Del 1 al 10, reportado por el usuario; sirve para la alerta de sobreesfuerzo |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_sesion | INT | **PK** |
+| id_usuario | INT | **FK** a `usuario` |
+| id_programa | INT | **FK** a `programa`; vacío si fue una rutina libre |
+| fecha_inicio | DATETIME | |
+| fecha_fin | DATETIME | |
+| esfuerzo_percibido | INT | Del 1 al 10; base de la alerta de sobreesfuerzo |
 
 ### 3.7 `registro_serie`
-Detalle de cada serie realizada. De esta tabla salen los gráficos de volumen y los récords personales.
+Cada serie realizada. De acá salen los gráficos de volumen y los récords.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_registro | INT | PK | Identificador |
-| id_sesion | INT | FK a `sesion_entrenamiento` | Sesión a la que pertenece |
-| id_ejercicio | INT | FK a `ejercicio` | Ejercicio realizado |
-| numero_serie | INT | | Orden de la serie |
-| repeticiones | INT | | Repeticiones logradas |
-| carga_extra_kg | DECIMAL | | Peso adicional, si lo hubo |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_registro | INT | **PK** |
+| id_sesion | INT | **FK** a `sesion_entrenamiento` |
+| id_ejercicio | INT | **FK** a `ejercicio` |
+| numero_serie | INT | |
+| repeticiones | INT | |
+| peso_extra_kg | DECIMAL | Si hubo lastre |
 
 ### 3.8 `contratacion`
-Vínculo entre un usuario y un entrenador (sesiones virtuales o planes personalizados). Es la base del marketplace.
+Vínculo entre un usuario y un entrenador. Es la base del marketplace.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_contratacion | INT | PK | Identificador |
-| id_usuario | INT | FK a `usuario` | Alumno |
-| id_entrenador | INT | FK a `entrenador` | Entrenador contratado |
-| tipo | VARCHAR | | `sesion_virtual` o `plan_personalizado` |
-| precio_acordado | DECIMAL | | Precio vigente al contratar (fotografía histórica) |
-| estado | VARCHAR | | Estado actual: `pendiente`, `activa`, `finalizada` o `cancelada` |
-| fecha | DATETIME | | Momento de la contratación |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_contratacion | INT | **PK** |
+| id_usuario | INT | **FK** a `usuario` |
+| id_entrenador | INT | **FK** a `entrenador` |
+| tipo | VARCHAR | Sesión virtual o plan personalizado |
+| precio_acordado | DECIMAL | Fotografía histórica del precio |
+| estado | VARCHAR | Pendiente, activa, finalizada o cancelada |
+| fecha | DATETIME | |
 
 ### 3.9 `suscripcion`
-Períodos del plan premium de cada usuario.
+Períodos del plan premium.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_suscripcion | INT | PK | Identificador |
-| id_usuario | INT | FK a `usuario` | Suscriptor |
-| fecha_inicio | DATE | | Alta |
-| fecha_fin | DATE | | Vencimiento o baja |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_suscripcion | INT | **PK** |
+| id_usuario | INT | **FK** a `usuario` |
+| fecha_inicio | DATE | |
+| fecha_fin | DATE | |
 
 ### 3.10 `pago`
-Cada cobro, ya sea de una contratación o de una suscripción.
+Cada cobro, de una contratación o de una suscripción.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_pago | INT | PK | Identificador |
-| id_contratacion | INT | FK a `contratacion` | Se completa si el pago es por un entrenador |
-| id_suscripcion | INT | FK a `suscripcion` | Se completa si el pago es por premium |
-| monto | DECIMAL | | Importe cobrado |
-| porcentaje_comision | DECIMAL | | Comisión aplicada en ese momento (fotografía histórica) |
-| fecha | DATETIME | | Momento del cobro |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_pago | INT | **PK** |
+| id_contratacion | INT | **FK** a `contratacion`; vacío si es por suscripción |
+| id_suscripcion | INT | **FK** a `suscripcion`; vacío si es por contratación |
+| monto | DECIMAL | |
+| porcentaje_comision | DECIMAL | Fotografía histórica de la comisión |
+| fecha | DATETIME | |
 
 ### 3.11 `calificacion`
-Puntaje que el usuario da al entrenador luego de una contratación.
+Puntaje que el usuario le da al entrenador.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_calificacion | INT | PK | Identificador |
-| id_contratacion | INT | FK a `contratacion` | Servicio calificado (una calificación por contratación) |
-| puntaje | INT | | De 1 a 5 |
-| comentario | TEXT | | Opinión opcional |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_calificacion | INT | **PK** |
+| id_contratacion | INT | **FK** a `contratacion`; una sola por contratación |
+| puntaje | INT | De 1 a 5 |
+| comentario | TEXT | Opcional |
 
 ### 3.12 `foto_progreso`
-Fotos de progreso del usuario, dato sensible.
+Fotos de progreso del usuario. Dato sensible.
 
-| Campo | Tipo | Clave | Descripción |
-|---|---|---|---|
-| id_foto | INT | PK | Identificador |
-| id_usuario | INT | FK a `usuario` | Propietario |
-| ruta_archivo | VARCHAR | | Ubicación del archivo cifrado; la base guarda solo la ruta |
-| fecha | DATE | | Fecha de la foto |
-| acepto_uso | BOOLEAN | | Consentimiento propio para fotos |
+| Campo | Tipo | Observación |
+|---|---|---|
+| id_foto | INT | **PK** |
+| id_usuario | INT | **FK** a `usuario` |
+| ruta_archivo | VARCHAR | Ubicación del archivo; la base no guarda la imagen |
+| fecha | DATE | |
+| acepto_uso | BOOLEAN | Consentimiento propio para fotos |
 
 ### 3.13 Diagrama E-R
 
 ```mermaid
 erDiagram
-    usuario ||--o| entrenador : "es"
-    entrenador ||--o{ programa : "diseña"
-    programa ||--o{ programa_ejercicio : "contiene"
-    ejercicio ||--o{ programa_ejercicio : "forma parte de"
-    ejercicio |o--o{ ejercicio : "progresion o regresion"
-    usuario ||--o{ sesion_entrenamiento : "realiza"
-    programa |o--o{ sesion_entrenamiento : "se sigue en"
-    sesion_entrenamiento ||--o{ registro_serie : "registra"
-    ejercicio ||--o{ registro_serie : "se ejecuta en"
-    usuario ||--o{ contratacion : "contrata"
-    entrenador ||--o{ contratacion : "recibe"
-    contratacion ||--o| calificacion : "genera"
-    usuario ||--o{ suscripcion : "adquiere"
-    contratacion |o--o{ pago : "se cobra con"
-    suscripcion |o--o{ pago : "se cobra con"
-    usuario ||--o{ foto_progreso : "sube"
-
-    usuario {
-        int id_usuario PK
-        varchar email
-        varchar contrasena_hash
-        varchar nombre
-        varchar rol
-        varchar plan
-        boolean acepto_datos_salud
-        datetime fecha_registro
-    }
-    entrenador {
-        int id_entrenador PK
-        int id_usuario FK
-        varchar especialidad
-        varchar certificacion
-        decimal tarifa
-        varchar disponibilidad
-    }
-    ejercicio {
-        int id_ejercicio PK
-        varchar nombre
-        text descripcion
-        varchar nivel
-        varchar url_video
-        int id_progresion FK
-        int id_regresion FK
-    }
-    programa {
-        int id_programa PK
-        int id_entrenador FK
-        varchar titulo
-        int duracion_semanas
-        boolean es_gratuito
-    }
-    programa_ejercicio {
-        int id_programa_ejercicio PK
-        int id_programa FK
-        int id_ejercicio FK
-        int semana
-        int dia
-        int series_objetivo
-        int repeticiones_objetivo
-    }
-    sesion_entrenamiento {
-        int id_sesion PK
-        int id_usuario FK
-        int id_programa FK
-        datetime fecha_inicio
-        datetime fecha_fin
-        int esfuerzo_percibido
-    }
-    registro_serie {
-        int id_registro PK
-        int id_sesion FK
-        int id_ejercicio FK
-        int numero_serie
-        int repeticiones
-        decimal carga_extra_kg
-    }
-    contratacion {
-        int id_contratacion PK
-        int id_usuario FK
-        int id_entrenador FK
-        varchar tipo
-        decimal precio_acordado
-        varchar estado
-        datetime fecha
-    }
-    suscripcion {
-        int id_suscripcion PK
-        int id_usuario FK
-        date fecha_inicio
-        date fecha_fin
-    }
-    pago {
-        int id_pago PK
-        int id_contratacion FK
-        int id_suscripcion FK
-        decimal monto
-        decimal porcentaje_comision
-        datetime fecha
-    }
-    calificacion {
-        int id_calificacion PK
-        int id_contratacion FK
-        int puntaje
-        text comentario
-    }
-    foto_progreso {
-        int id_foto PK
-        int id_usuario FK
-        varchar ruta_archivo
-        date fecha
-        boolean acepto_uso
-    }
+    USUARIO ||--o| ENTRENADOR : "es"
+    ENTRENADOR ||--o{ PROGRAMA : "disena"
+    PROGRAMA ||--o{ PROGRAMA_EJERCICIO : "contiene"
+    EJERCICIO ||--o{ PROGRAMA_EJERCICIO : "forma parte de"
+    EJERCICIO |o--o{ EJERCICIO : "progresion o regresion"
+    USUARIO ||--o{ SESION_ENTRENAMIENTO : "realiza"
+    PROGRAMA |o--o{ SESION_ENTRENAMIENTO : "se sigue en"
+    SESION_ENTRENAMIENTO ||--o{ REGISTRO_SERIE : "registra"
+    EJERCICIO ||--o{ REGISTRO_SERIE : "se ejecuta en"
+    USUARIO ||--o{ CONTRATACION : "contrata"
+    ENTRENADOR ||--o{ CONTRATACION : "recibe"
+    CONTRATACION ||--o| CALIFICACION : "tiene"
+    USUARIO ||--o{ SUSCRIPCION : "adquiere"
+    CONTRATACION |o--o{ PAGO : "se cobra con"
+    SUSCRIPCION |o--o{ PAGO : "se cobra con"
+    USUARIO ||--o{ FOTO_PROGRESO : "sube"
 ```
 
-### 3.14 Relaciones, cardinalidades y claves foráneas
+Cómo leer los símbolos: `||` significa "uno", `o|` "cero o uno" y `o{` "cero o muchos".
+
+### 3.14 Relaciones, cardinalidad y claves foráneas
 
 | Relación | Cardinalidad | Clave foránea |
 |---|---|---|
-| `usuario` y `entrenador` | 1:1 | `entrenador.id_usuario` |
-| `entrenador` y `programa` | 1:N | `programa.id_entrenador` |
-| `programa` y `ejercicio` | N:M | `programa_ejercicio.id_programa` y `.id_ejercicio` |
-| `ejercicio` y `ejercicio` (progresión y regresión) | 1:N | `ejercicio.id_progresion` y `.id_regresion` |
-| `usuario` y `sesion_entrenamiento` | 1:N | `sesion_entrenamiento.id_usuario` |
-| `programa` y `sesion_entrenamiento` | 1:N | `sesion_entrenamiento.id_programa` |
-| `sesion_entrenamiento` y `registro_serie` | 1:N | `registro_serie.id_sesion` |
-| `ejercicio` y `registro_serie` | 1:N | `registro_serie.id_ejercicio` |
-| `usuario` y `entrenador` (a través de `contratacion`) | N:M | `contratacion.id_usuario` y `.id_entrenador` |
-| `contratacion` y `calificacion` | 1:1 | `calificacion.id_contratacion` |
-| `usuario` y `suscripcion` | 1:N | `suscripcion.id_usuario` |
-| `contratacion` y `pago` | 1:N | `pago.id_contratacion` |
-| `suscripcion` y `pago` | 1:N | `pago.id_suscripcion` |
-| `usuario` y `foto_progreso` | 1:N | `foto_progreso.id_usuario` |
+| Un **usuario** puede ser un **entrenador** | 1:1 | `entrenador.id_usuario` |
+| Un **entrenador** diseña muchos **programas** | 1:N | `programa.id_entrenador` |
+| Un **programa** tiene muchos **ejercicios** y un **ejercicio** está en muchos **programas** | N:M | `programa_ejercicio.id_programa` y `programa_ejercicio.id_ejercicio` |
+| Un **ejercicio** es la progresión o regresión de otros | 1:N | `ejercicio.id_progresion` y `ejercicio.id_regresion` |
+| Un **usuario** realiza muchas **sesiones** | 1:N | `sesion_entrenamiento.id_usuario` |
+| Un **programa** se sigue en muchas **sesiones** | 1:N | `sesion_entrenamiento.id_programa` |
+| Una **sesión** registra muchas **series** | 1:N | `registro_serie.id_sesion` |
+| Un **ejercicio** se ejecuta en muchas **series** | 1:N | `registro_serie.id_ejercicio` |
+| Un **usuario** contrata a muchos **entrenadores** y un **entrenador** tiene muchos **alumnos** | N:M | `contratacion.id_usuario` y `contratacion.id_entrenador` |
+| Una **contratación** tiene una **calificación** | 1:1 | `calificacion.id_contratacion` |
+| Un **usuario** tiene muchas **suscripciones** | 1:N | `suscripcion.id_usuario` |
+| Una **contratación** se cobra con muchos **pagos** | 1:N | `pago.id_contratacion` |
+| Una **suscripción** se cobra con muchos **pagos** | 1:N | `pago.id_suscripcion` |
+| Un **usuario** sube muchas **fotos de progreso** | 1:N | `foto_progreso.id_usuario` |
+
+### 3.15 Ficha de dato
+
+Una ficha simple documenta los datos más importantes, para que nadie entienda algo distinto por el mismo nombre.
+
+| Campo | `registro_serie.repeticiones` | `contratacion.precio_acordado` |
+|---|---|---|
+| Significado | Repeticiones logradas en una serie | Precio del servicio al momento de contratar |
+| Origen | El usuario, al terminar la serie | La tarifa del entrenador en ese momento |
+| Uso | Gráficos de volumen, récords y adaptación de la rutina | Calcular el pago y la comisión de FitConnect |
+| Obligatorio | Sí | Sí |
+| Regla | Mayor a cero | No cambia aunque el entrenador cambie su tarifa |
+| Retención | Se conserva como historial del usuario | Se conserva mientras exista la contratación |
+| Requerimientos relacionados | Seguimiento con gráficos y récords | Marketplace y comisión por transacción |
 
 ---
 
@@ -338,60 +335,54 @@ erDiagram
 
 ### ¿Qué consideraciones de normalización se tuvieron en cuenta?
 
-- **Cada dato se guarda en un solo lugar.** Los datos del entrenador están en `entrenador` y no repetidos en cada programa o contratación; los datos de un ejercicio están en `ejercicio` y no se copian en cada serie registrada.
-- **No hay listas dentro de un campo.** Los ejercicios de un programa no se guardan como texto dentro de `programa`, sino como filas de `programa_ejercicio`.
-- **Los datos derivados no se guardan.** Volumen, récords y calificación promedio se calculan, tal como indica la teoría, para no duplicar información sin una razón concreta.
-- **Separación de entidades distintas.** El perfil del entrenador se separa de `usuario` para no dejar campos vacíos en quienes solo entrenan.
-- **Excepción justificada.** `precio_acordado` y `porcentaje_comision` se copian a propósito, porque el entrenador puede cambiar su tarifa y FitConnect puede cambiar su comisión, y los cobros ya realizados no deben modificarse. Es el caso de "conservar una fotografía histórica" que plantea la teoría.
+Normalizar es organizar las tablas para que cada dato se guarde una sola vez.
+- **Cada dato en un solo lugar.** Los datos del entrenador están en `entrenador` y no se repiten en cada programa o contratación.
+- **Sin listas dentro de un campo.** Los ejercicios de un programa no se escriben dentro de `programa`; cada uno es una fila de `programa_ejercicio`.
+- **Sin datos derivados.** Volumen, récords y calificación promedio se calculan.
+- **Entidades separadas.** El perfil del entrenador está aparte de `usuario`, para no dejar campos vacíos.
+- **Excepción justificada.** `precio_acordado` y `porcentaje_comision` se copian a propósito: son la fotografía histórica de cada cobro.
 
 ### ¿Se identificó alguna tabla asociativa para resolver relaciones N:M?
 
-Sí, dos tablas resuelven relaciones N:M de forma explícita:
-
-1. **`programa_ejercicio`**: un programa tiene muchos ejercicios y un ejercicio aparece en muchos programas. La tabla agrega los datos propios de la relación: semana, día, series y repeticiones objetivo.
-2. **`contratacion`**: un usuario puede contratar a muchos entrenadores y un entrenador tiene muchos alumnos. La tabla agrega tipo de servicio, precio y estado, y además es el punto al que se conectan `pago` y `calificacion`.
+Sí. Una tabla asociativa conecta dos entidades que se relacionan "muchos a muchos" y guarda los datos propios de esa relación.
+1. **`programa_ejercicio`:** un programa tiene muchos ejercicios y un ejercicio está en muchos programas. Guarda semana, día, series y repeticiones.
+2. **`contratacion`:** un usuario contrata a muchos entrenadores y un entrenador tiene muchos alumnos. Guarda tipo, precio y estado, y a ella se conectan el pago y la calificación.
 
 ### ¿Cómo se manejaría el historial de entrenamientos y progreso del usuario?
 
-La teoría distingue el estado actual ("¿cómo está ahora?") del historial ("¿qué ocurrió antes?"). En FitConnect ambos conviven:
+El estado actual responde "¿cómo está ahora?". El historial responde "¿qué ocurrió antes?". FitConnect necesita los dos.
+- **Historial:** cada entrenamiento genera una fila en `sesion_entrenamiento` y una por serie en `registro_serie`. No se modifican ni se borran: solo se agregan.
+- **Progreso y récords:** se calculan consultando `registro_serie`.
+- **Estado actual:** `usuario.plan` y `contratacion.estado` muestran la situación vigente; `suscripcion` y `pago` conservan lo que pasó antes.
+- **Sobreesfuerzo:** la alerta usa el `esfuerzo_percibido` de las últimas sesiones.
+- **Fotos de progreso:** se guardan con su fecha para comparar la evolución.
 
-- **Historial de entrenamientos:** cada entrenamiento genera una fila en `sesion_entrenamiento` y una por serie en `registro_serie`. Estos registros no se modifican ni se borran; solo se agregan. Así el sistema puede mostrar los gráficos de volumen y los récords personales que promete el enunciado.
-- **Progreso y récords:** se calculan consultando `registro_serie` (por ejemplo, la mayor cantidad de repeticiones de un ejercicio por usuario). No se guardan aparte.
-- **Estado actual:** el plan del usuario (`usuario.plan`) y el estado de cada contratación (`contratacion.estado`) muestran la situación vigente, mientras que `suscripcion` y `pago` conservan lo ocurrido antes.
-- **Sobreesfuerzo:** la alerta se apoya en `esfuerzo_percibido` de las últimas sesiones.
-- **Fotos de progreso:** se guardan con su fecha para poder comparar la evolución en el tiempo.
+Guardar solo el estado actual permitiría consultar rápido, pero impediría armar los gráficos de progreso que promete el enunciado.
 
 ---
 
 ## 5. Validación del modelo
 
-### Con las funcionalidades del enunciado
+### Con un caso de uso
 
-| Funcionalidad | Datos necesarios | Tablas que los cubren |
-|---|---|---|
-| Registrar un entrenamiento con contador de repeticiones | Quién entrena, qué ejercicio, cuántas repeticiones y qué esfuerzo sintió | `usuario`, `sesion_entrenamiento`, `registro_serie`, `ejercicio` |
-| Contratar a un entrenador y pagar | Usuario, entrenador, precio, estado, cobro y comisión | `usuario`, `entrenador`, `contratacion`, `pago` |
-| El entrenador diseña un programa de 4 a 16 semanas | Autor, duración, ejercicios por semana y día | `entrenador`, `programa`, `programa_ejercicio`, `ejercicio` |
+Tomamos "Registrar un entrenamiento" y recorremos cada paso:
+1. El usuario elige el programa del día: necesitamos identificar el programa y sus ejercicios.
+2. El sistema muestra el ejercicio y su video: necesitamos el ejercicio y su enlace.
+3. El usuario cuenta repeticiones y termina la serie: necesitamos guardar la serie.
+4. El usuario indica cómo se sintió: necesitamos el esfuerzo percibido de la sesión.
+5. El sistema compara con sesiones anteriores: necesitamos el historial de series.
+6. El sistema muestra el récord o una alerta: necesitamos calcularlo desde las series registradas.
 
-### Con consultas esperadas
+Si un paso no tiene datos suficientes, el modelo está incompleto o el requerimiento todavía es ambiguo.
 
-Si el modelo no puede responder una consulta, hay que volver a relevar información. El modelo responde:
+### Con consultas
 
-- ¿Qué entrenadores de una especialidad tienen una tarifa y disponibilidad determinadas? (`entrenador`)
-- ¿Cuántas series y repeticiones hizo un usuario este mes en cada ejercicio? (`sesion_entrenamiento` y `registro_serie`)
-- ¿Cuál es el récord personal de un usuario en dominadas? (`registro_serie`)
-- ¿Cuánto retuvo FitConnect por comisiones en un mes? (`pago`)
-- ¿Cuál es la calificación promedio de un entrenador? (`calificacion` a través de `contratacion`)
-- ¿Qué programas gratuitos ofrece la versión libre? (`programa`)
+Las consultas esperadas funcionan como prueba del modelo:
+- ¿Qué entrenadores de calistenia tienen una tarifa y disponibilidad determinadas?
+- ¿Cuántas repeticiones hizo un usuario este mes en cada ejercicio?
+- ¿Cuál es el récord personal de un usuario en dominadas?
+- ¿Cuánto retuvo FitConnect por comisiones en el mes?
+- ¿Cuál es la calificación promedio de un entrenador?
+- ¿Qué programas ofrece la versión gratuita?
 
----
-
-## 6. Preguntas pendientes para validar con los stakeholders
-
-Un modelo debe hacer visibles las decisiones que todavía no están cerradas:
-
-- **Ana (Head de Entrenadores):** ¿un programa se diseña siempre para un nivel único, o puede adaptarse por alumno? ¿Un plan personalizado es una copia editable de un programa o se arma desde cero?
-- **Mara (Legal):** ¿por cuánto tiempo se conservan las sesiones, las fotos y los datos de salud de un usuario inactivo? ¿Qué debe ocurrir con sus datos si pide la baja?
-- **Gabriel (Product Manager):** ¿la comisión es un porcentaje único o varía según el entrenador o el tipo de servicio? ¿Cómo se define la disponibilidad de un entrenador?
-- **Diego (CTO / DevOps):** ¿dónde se almacenan los videos y las fotos, y con qué límites de espacio por usuario en la versión premium?
-
+Si no podemos responder una consulta con los datos identificados, debemos volver al requerimiento y relevar más información.
