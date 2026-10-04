@@ -26,6 +26,72 @@ Justificación del enunciado: El sistema almacena información sensible: datos p
 ¿Por qué es importante para FitConnect? Una filtración de datos afectaría la privacidad de los usuarios, dañaría la reputación de la plataforma y podría generar sanciones legales (Ley 25.326 de Protección de Datos Personales). Por eso es fundamental proteger la información mediante autenticación, cifrado, control de acceso por roles y comunicación segura (HTTPS).
 
 
+¿Qué otros atributos de calidad no mencionados en el enunciado consideran críticos para FitConnect?
+1. Fiabilidad 
+FitConnect guarda el historial de entrenamientos y el progreso de cada usuario, y las reservas dependen de que el sistema esté operativo. Si la plataforma falla o se pierden datos, el usuario pierde meses de información y puede abandonar la aplicación.
 
+2. Escalabilidad
+El proyecto apunta a sumar usuarios y entrenadores con el tiempo, y el historial crece con cada sesión registrada. El sistema debe mantener su rendimiento cuando aumenta la cantidad de usuarios y de datos, sin tener que rediseñarlo.
 
+3. Interoperabilidad
+FitConnect se apoya en servicios externos: pasarela de pagos, correo electrónico y notificaciones push. Debe comunicarse con ellos de forma correcta y seguir funcionando de manera controlada si alguno falla.
+
+4. Adecuación funcional 
+Las funciones deben dar resultados exactos. Por ejemplo, no puede haber dos reservas para el mismo horario, y los gráficos de progreso deben reflejar fielmente lo que el usuario registró. Un error en estos cálculos afecta directamente la confianza en la plataforma.
+
+ ## Medición del cumplimiento de los atributos de calidad
+
+```mermaid
+flowchart LR
+    subgraph ATR["Atributos de calidad"]
+        subgraph BASE["Categorías de la materia"]
+            usab["Usabilidad<br/>Meta: primer registro en menos de 3 min y SUS mayor a 70"]
+            efic["Eficiencia<br/>Meta: menos de 3 s con 1.000 usuarios"]
+            mant["Mantenibilidad<br/>Meta: cobertura de pruebas mayor al 70%"]
+            port["Portabilidad<br/>Meta: 100% operativo en Android, iOS y web"]
+            segu["Seguridad<br/>Meta: cero vulnerabilidades críticas"]
+        end
+        subgraph EXTRA["Otros atributos críticos"]
+            fiab["Fiabilidad<br/>Meta: disponibilidad mensual de 99%"]
+            esca["Escalabilidad<br/>Meta: menos de 3 s al duplicar usuarios"]
+            inte["Interoperabilidad<br/>Meta: 100% de transacciones correctas"]
+            adec["Adecuación funcional<br/>Meta: 100% de criterios y 0 reservas duplicadas"]
+        end
+    end
+
+    subgraph TEC["Técnicas de medición"]
+        t1["Pruebas con usuarios<br/>Tiempo de tarea y encuesta SUS"]
+        t2["Pruebas de carga y estrés<br/>JMeter o k6"]
+        t3["Análisis de código<br/>SonarQube y cobertura de pruebas"]
+        t4["Pruebas de compatibilidad<br/>Dispositivos y navegadores"]
+        t5["Pruebas funcionales<br/>Aceptación e integración"]
+        t6["Pruebas de intrusión<br/>OWASP ZAP"]
+        t7["Monitoreo continuo<br/>Uptime y restauración de backups"]
+    end
+
+    subgraph EVA["Evaluación"]
+        res["Comparar el resultado con la meta"]
+        ok["Cumple<br/>Se mantiene el control periódico"]
+        nook["No cumple<br/>Se corrige y se vuelve a medir"]
+    end
+
+    usab --> t1
+    efic --> t2
+    esca --> t2
+    mant --> t3
+    port --> t4
+    adec --> t5
+    inte --> t5
+    segu --> t6
+    fiab --> t7
+
+    t1 & t2 & t3 & t4 & t5 & t6 & t7 --> res
+    res --> ok
+    res --> nook
+
+    classDef extra stroke-dasharray: 5 5
+    class fiab,esca,inte,adec extra
+```
+
+Los atributos con borde punteado son los adicionales (los que no forman parte de las cinco categorías de la materia).
 
