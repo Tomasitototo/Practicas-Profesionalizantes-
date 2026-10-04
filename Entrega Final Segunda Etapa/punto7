@@ -39,59 +39,35 @@ FitConnect se apoya en servicios externos: pasarela de pagos, correo electrónic
 4. Adecuación funcional 
 Las funciones deben dar resultados exactos. Por ejemplo, no puede haber dos reservas para el mismo horario, y los gráficos de progreso deben reflejar fielmente lo que el usuario registró. Un error en estos cálculos afecta directamente la confianza en la plataforma.
 
- ## Medición del cumplimiento de los atributos de calidad
+¿Cómo medirían el cumplimiento de estos atributos de calidad?
 
-```mermaid
-flowchart LR
-    subgraph ATR["Atributos de calidad"]
-        subgraph BASE["Categorías de la materia"]
-            usab["Usabilidad<br/>Meta: primer registro en menos de 3 min y SUS mayor a 70"]
-            efic["Eficiencia<br/>Meta: menos de 3 s con 1.000 usuarios"]
-            mant["Mantenibilidad<br/>Meta: cobertura de pruebas mayor al 70%"]
-            port["Portabilidad<br/>Meta: 100% operativo en Android, iOS y web"]
-            segu["Seguridad<br/>Meta: cero vulnerabilidades críticas"]
-        end
-        subgraph EXTRA["Otros atributos críticos"]
-            fiab["Fiabilidad<br/>Meta: disponibilidad mensual de 99%"]
-            esca["Escalabilidad<br/>Meta: menos de 3 s al duplicar usuarios"]
-            inte["Interoperabilidad<br/>Meta: 100% de transacciones correctas"]
-            adec["Adecuación funcional<br/>Meta: 100% de criterios y 0 reservas duplicadas"]
-        end
-    end
+Atributos de las categorías vistas en la materia
 
-    subgraph TEC["Técnicas de medición"]
-        t1["Pruebas con usuarios<br/>Tiempo de tarea y encuesta SUS"]
-        t2["Pruebas de carga y estrés<br/>JMeter o k6"]
-        t3["Análisis de código<br/>SonarQube y cobertura de pruebas"]
-        t4["Pruebas de compatibilidad<br/>Dispositivos y navegadores"]
-        t5["Pruebas funcionales<br/>Aceptación e integración"]
-        t6["Pruebas de intrusión<br/>OWASP ZAP"]
-        t7["Monitoreo continuo<br/>Uptime y restauración de backups"]
-    end
+Usabilidad
+Se mide con pruebas a usuarios reales, en las que se cronometra el tiempo que tardan en completar una tarea, y con la encuesta de satisfacción SUS. La meta es que un usuario nuevo pueda registrar su primer entrenamiento en menos de 3 minutos y que el puntaje SUS sea mayor a 70.
 
-    subgraph EVA["Evaluación"]
-        res["Comparar el resultado con la meta"]
-        ok["Cumple<br/>Se mantiene el control periódico"]
-        nook["No cumple<br/>Se corrige y se vuelve a medir"]
-    end
+Eficiencia
+Se mide con pruebas de carga y estrés, utilizando herramientas como JMeter o k6, y con el monitoreo de los tiempos de respuesta del sistema. La meta es que las operaciones habituales respondan en menos de 3 segundos con 1.000 usuarios concurrentes.
 
-    usab --> t1
-    efic --> t2
-    esca --> t2
-    mant --> t3
-    port --> t4
-    adec --> t5
-    inte --> t5
-    segu --> t6
-    fiab --> t7
+Mantenibilidad
+Se mide con el análisis del código mediante una herramienta como SonarQube, que informa la cobertura de pruebas y la complejidad ciclomática. La meta es una cobertura de pruebas mayor al 70% en las funciones críticas.
 
-    t1 & t2 & t3 & t4 & t5 & t6 & t7 --> res
-    res --> ok
-    res --> nook
+Portabilidad
+Se mide con pruebas funcionales en distintos dispositivos, sistemas operativos y navegadores. La meta es que el 100% de las funciones principales opere correctamente en Android, iOS, Chrome, Firefox, Safari y Edge.
 
-    classDef extra stroke-dasharray: 5 5
-    class fiab,esca,inte,adec extra
-```
+Seguridad
+Se mide con pruebas de penetración y análisis de vulnerabilidades, por ejemplo con OWASP ZAP. La meta es no tener vulnerabilidades críticas antes del lanzamiento.
 
-Los atributos con borde punteado son los adicionales (los que no forman parte de las cinco categorías de la materia).
+Atributos adicionales
 
+Fiabilidad
+Se mide con el monitoreo del tiempo en funcionamiento (uptime), el registro de incidentes y pruebas de restauración de las copias de seguridad. La meta es una disponibilidad de al menos el 99% mensual y que la restauración de datos sea exitosa en el 100% de las pruebas.
+
+Escalabilidad
+Se mide con pruebas de carga incrementales, en las que se duplica la cantidad de usuarios y de datos mientras se monitorea el uso de recursos. La meta es que, al duplicar los usuarios concurrentes, el tiempo de respuesta siga siendo menor a 3 segundos agregando instancias del servidor.
+
+Interoperabilidad
+Se mide con pruebas de integración con la pasarela de pagos, el servicio de correo y las notificaciones push. La meta es que el 100% de las transacciones de prueba se procese correctamente y que la falla de un servicio externo no provoque la caída del sistema.
+
+Adecuación funcional
+Se mide con casos de prueba basados en los criterios de aceptación de las historias de usuario y con pruebas de concurrencia. La meta es aprobar el 100% de los criterios de aceptación y no registrar ninguna reserva duplicada cuando varios usuarios intentan reservar el mismo horario a la vez.
