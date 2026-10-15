@@ -2,21 +2,21 @@
 
 ## ¿Qué arquitectura propones?
 
-Se propone una arquitectura **Cliente-Servidor organizada en Capas**, implementada como un **monolito modular** (una única aplicación desplegable, dividida internamente en módulos con límites claros: Usuarios, Rutinas/Entrenamiento, Pagos y Comisiones, Notificaciones). El contenido audiovisual (video de ejercicios) se resuelve aparte, delegado a un servicio de **CDN externo** con streaming HLS/DASH — esto es una decisión de infraestructura, no exige por sí sola una arquitectura de microservicios.
+Se propone una arquitectura **Cliente-Servidor organizada en Capas**, implementada como un **monolito modular** (una única aplicación desplegable, dividida internamente en módulos con límites claros: Usuarios, Rutinas/Entrenamiento, Pagos y Comisiones, Notificaciones). El contenido audiovisual (video de ejercicios) se resuelve aparte, delegado a un servicio de **CDN externo** con streaming HLS/DASH; esto es una decisión de infraestructura, no exige por sí sola una arquitectura de microservicios.
 
 ## ¿Por qué se eligió esta arquitectura para FitConnect?
 
 Siguiendo el criterio de selección visto en la materia ("elegir una opción suficientemente simple para la evidencia disponible"), se descartó microservicios como punto de partida:
 
-- **No hay evidencia de que se necesiten** — FitConnect es un MVP recién arrancando, con un dominio todavía acotado (usuarios, rutinas, pagos) y sin límites de negocio probados en producción.
-- **El equipo es pequeño** — se menciona un solo CTO (Diego) a cargo de la infraestructura; no hay evidencia de múltiples equipos autónomos que necesiten desplegar sus propios servicios de forma independiente.
-- **El plazo es corto** (3 meses para el MVP) — la complejidad operativa de microservicios (orquestación, observabilidad distribuida, despliegues coordinados) consumiría tiempo que el proyecto no tiene todavía.
-- **Los requisitos de Diego no exigen microservicios** — el streaming de video ya se resuelve con una CDN externa (una decisión de infraestructura, no de arquitectura de la aplicación), y las transacciones de pagos/suscripciones se benefician de la **consistencia fuerte** que un monolito con una sola base de datos ofrece más fácilmente que un sistema distribuido.
+- **No hay evidencia de que se necesiten:** FitConnect es un MVP recién arrancando, con un dominio todavía acotado (usuarios, rutinas, pagos) y sin límites de negocio probados en producción.
+- **El equipo es pequeño:** se menciona un solo CTO (Diego) a cargo de la infraestructura; no hay evidencia de múltiples equipos autónomos que necesiten desplegar sus propios servicios de forma independiente.
+- **El plazo es corto** (3 meses para el MVP): la complejidad operativa de microservicios (orquestación, observabilidad distribuida, despliegues coordinados) consumiría tiempo que el proyecto no tiene todavía.
+- **Los requisitos de Diego no exigen microservicios:** el streaming de video ya se resuelve con una CDN externa (una decisión de infraestructura, no de arquitectura de la aplicación), y las transacciones de pagos/suscripciones se benefician de la **consistencia fuerte** que un monolito con una sola base de datos ofrece más fácilmente que un sistema distribuido.
 
 ## ¿Qué características del proyecto la hacen apropiada?
 
 - **Dominio acotado para el MVP:** las funcionalidades iniciales (registro, rutinas, seguimiento de entrenamiento, panel de entrenador) están relacionadas y se pueden razonar como una sola unidad todavía.
-- **Necesidad de consistencia en pagos:** el cálculo de comisiones (20%-30%) y el estado de las suscripciones premium requieren transacciones confiables; un monolito con una única base de datos evita la complejidad de consistencia eventual entre servicios distribuidos.
+- **Necesidad de consistencia en pagos:** el cálculo de la comisión (20 % fijo por transacción en el MVP) y el estado de las suscripciones premium requieren transacciones confiables; un monolito con una única base de datos evita la complejidad de consistencia eventual entre servicios distribuidos.
 - **Restricción de equipo y tiempo:** con un plazo de 3 meses y un equipo técnico chico, un monolito modular permite simplicidad de despliegue y depuración mientras se valida el producto en el mercado.
 - **Separación interna por módulos:** aunque es un solo desplegable, cada módulo (Rutinas, Pagos, Notificaciones) mantiene responsabilidades cohesivas, lo que deja abierta la puerta a extraer un módulo puntual en el futuro si aparece evidencia real de que lo necesita.
 
@@ -49,6 +49,7 @@ flowchart TB
     end
 
     CDN[(CDN externa - Streaming HLS/DASH)]
+    Pasarela[Pasarela de pagos externa - Stripe]
     DB[(Base de Datos única)]
 
     MApp --> Pres
@@ -57,6 +58,7 @@ flowchart TB
     Negocio --> Datos
     Datos --> DB
     ModRut --> CDN
+    ModPay --> Pasarela
 ```
 
 ## Ventajas que aporta esta arquitectura al proyecto

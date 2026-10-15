@@ -6,7 +6,7 @@ Para FitConnect elegimos dos técnicas de elicitación complementarias: una cual
 
 ## Técnica 1: Entrevistas
 
-**Descripción del proceso — ¿Cómo se aplicaría en FitConnect?**
+**Descripción del proceso: ¿Cómo se aplicaría en FitConnect?**
 
 Se realizarían entrevistas semiestructuradas individuales a los distintos perfiles de stakeholders identificados en la Primera Etapa:
 
@@ -30,7 +30,7 @@ Los entrenadores tienen agendas muy ajustadas (dan clases, atienden alumnos) y c
 
 ## Técnica 2: Encuestas / Cuestionarios
 
-**Descripción del proceso — ¿Cómo se aplicaría en FitConnect?**
+**Descripción del proceso: ¿Cómo se aplicaría en FitConnect?**
 
 Se diseñaría un cuestionario online (Google Forms o Typeform) de 10-15 preguntas cerradas (escala Likert, opción múltiple) más 1-2 abiertas, distribuido a:
 
@@ -50,16 +50,17 @@ Las respuestas cerradas no permiten indagar el "por qué" detrás de una opinió
 
 ---
 
-## Validación cruzada con los Criterios de Aceptación del MVP (Punto 3)
+## Validación cruzada con el alcance del MVP (Primera Etapa, Punto 3)
 
-Las entrevistas no solo relevan necesidades nuevas: también sirven para **confirmar o refutar con los propios stakeholders** las 4 métricas de aceptación técnica ya definidas en el Punto 3 (Análisis de Stakeholders). Por eso, dentro de la guía de preguntas de cada entrevista se incluye una pregunta puntual atada a cada métrica:
+Las entrevistas no solo relevan necesidades nuevas: también sirven para **confirmar o refutar con los propios stakeholders** el alcance del MVP definido en el análisis de stakeholders de la Primera Etapa (Punto 3). Por eso, dentro de la guía de preguntas de cada entrevista se incluye una pregunta puntual atada a cada criterio:
 
-| Métrica de aceptación (Punto 3) | Stakeholder a validar | Pregunta de entrevista que la valida |
+| Criterio del MVP (Primera Etapa) | Stakeholder a validar | Pregunta de entrevista que lo valida |
 |---|---|---|
-| **Interfaz:** onboarding en máximo 3 taps | Gabriel (PM) y usuarios nuevos | "Si tuvieras que registrarte y arrancar a entrenar en menos de 3 toques, ¿qué información estarías dispuesto a saltear o completar después?" |
-| **Contenido mínimo:** al menos 3 plantillas estáticas por entrenador | Ana y entrenadores externos | "De las rutinas que ya usás con tus alumnos, ¿cuáles 3 elegirías como plantillas base si tuvieras que dejarlas precargadas en la app?" |
-| **Rendimiento de infraestructura:** APK < 200MB, carga < 3s | Diego (CTO) | "¿Qué contenido creés que NO puede vivir localmente en el dispositivo sin romper el límite de 200MB, y cómo lo resolverías con streaming?" |
-| **Seguridad:** cifrado TLS 1.3 / AES-256, consentimiento opt-in | Mara (Legal) | "¿Qué tipo de consentimiento necesitamos pedirle al usuario antes de guardar una foto de progreso, y qué pasa si no lo da?" |
+| **Interfaz:** registro e inicio de la primera actividad en máximo 3 toques | Gabriel (PM) y usuarios nuevos | "Si tuvieras que registrarte y arrancar a entrenar en menos de 3 toques, ¿qué información estarías dispuesto a saltear o completar después?" |
+| **Panel mínimo del entrenador en el Sprint 1:** plantillas, duplicación, armado arrastrando ejercicios, asignación y progreso básico | Ana y entrenadores externos | "De las herramientas del panel, ¿cuáles necesitás desde el primer día para no seguir trabajando con Excel y WhatsApp?" |
+| **Comisión:** 20 % fija y visible por transacción | Ana y entrenadores externos | "¿Una comisión fija del 20 % por transacción te resulta clara? ¿Qué información necesitás ver para saber cuánto ganás por sesión?" |
+| **Rendimiento:** instalador de menos de 200 MB y arranque en menos de 3 s | Diego (CTO) | "¿Qué contenido creés que NO puede vivir localmente en el dispositivo sin romper el límite de 200 MB, y cómo lo resolverías con streaming?" |
+| **Seguridad:** consentimientos explícitos y separados para datos de salud y para cada foto de progreso | Mara (Legal) | "¿Qué tipo de consentimiento necesitamos pedirle al usuario antes de guardar una foto de progreso, y qué pasa si no lo da?" |
 
-**¿Por qué esto responde al feedback del profesor?** Porque asegura que los Criterios de Aceptación del MVP no queden como una definición unilateral del equipo, sino que estén **corroborados por la fuente original** (el propio stakeholder que puso esa restricción), cerrando el círculo entre lo que se definió en el Punto 3 y lo que efectivamente se relevó en campo en el Punto 1.
+**¿Por qué es importante esta validación?** Porque asegura que el alcance del MVP no quede como una definición unilateral del equipo, sino que esté **corroborado por la fuente original** (el propio stakeholder que puso esa restricción), cerrando el círculo entre lo que se definió en la Primera Etapa y lo que efectivamente se releva en las entrevistas.
 

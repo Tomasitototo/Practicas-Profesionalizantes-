@@ -1,8 +1,8 @@
-## Diagramas de interacción
+# 4. Diagramas de Interacción (Unidad 5)
 
 Para cada uno de los tres casos de uso del Punto 3 se define un **diagrama de secuencia**: muestra la interacción entre los participantes ordenada en el tiempo para un escenario concreto. Se representa el camino feliz (flujo básico) de cada caso de uso.
 
-### Elementos del diagrama
+## Elementos del diagrama
 
 | Elemento | Qué representa | Cómo se ve |
 |---|---|---|
@@ -13,7 +13,7 @@ Para cada uno de los tres casos de uso del Punto 3 se define un **diagrama de se
 | Mensaje asíncrono | El emisor no espera respuesta | Flecha continua con punta abierta |
 | Retorno | La respuesta a un mensaje síncrono | Flecha discontinua con punta abierta |
 
-### Participantes
+## Participantes
 
 Los participantes respetan la arquitectura del Punto 5 (cliente-servidor en capas, una sola aplicación y una sola base de datos):
 

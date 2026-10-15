@@ -1,0 +1,65 @@
+# 7. Atributos de Calidad (Unidad 3)
+
+## 1. Usabilidad
+
+**Atributo identificado:** Facilidad de aprendizaje y de uso (la aplicación debe ser intuitiva para personas sin conocimientos técnicos).
+
+**Justificación del enunciado:** el enunciado plantea que FitConnect es para personas que enfrentan barreras como "no saber por dónde empezar" y que la calistenia "es accesible para todos los niveles de condición física". Además, la aplicación registra "cada ejercicio", por lo que el usuario la usa durante o inmediatamente después de entrenar, desde el celular y con poco tiempo disponible. Esto exige una interfaz simple y con pocos pasos; Gabriel lo fijó en un máximo de 3 toques para registrarse y empezar.
+
+**¿Por qué es importante para FitConnect?** Si registrar un entrenamiento o reservar una sesión resulta complicado, los usuarios abandonarán la aplicación. Como el objetivo del negocio es mejorar la adherencia al entrenamiento, una buena usabilidad influye directamente en la retención de usuarios y en el éxito del producto.
+
+## 2. Eficiencia (Performance)
+
+**Atributo identificado:** Tiempo de respuesta y uso de recursos del dispositivo.
+
+**Justificación del enunciado:** el enunciado exige que "la app debe iniciar en menos de 3 segundos, ocupar menos de 200MB, y funcionar en dispositivos de gama media-baja". A la vez, ofrece una biblioteca de ejercicios "con videos desde múltiples ángulos" y gráficos de seguimiento, que son el contenido más pesado de la aplicación.
+
+**¿Por qué es importante para FitConnect?** Los usuarios utilizan la aplicación en momentos puntuales y esperan respuestas inmediatas. Si la app tarda en abrir o no entra en un celular de gama media-baja, se pierde justamente al público que no puede pagar un gimnasio. Además, en las reservas, un sistema lento puede provocar conflictos como dos personas intentando tomar el mismo horario.
+
+## 3. Mantenibilidad
+
+**Atributo identificado:** Modificabilidad (facilidad para agregar o cambiar funcionalidades).
+
+**Justificación del enunciado:** el enunciado describe muchas funcionalidades que conviven en una misma plataforma (marketplace de trainers, biblioteca de ejercicios, programas de 4 a 16 semanas, seguimiento, comunidad y herramientas para trainers) y un sistema que "adapta las rutinas según los resultados obtenidos". El modelo freemium y la comisión por transacción también son reglas de negocio que pueden cambiar; durante el relevamiento la comisión ya pasó de una propuesta de 20 % a 30 % a un 20 % fijo, y Gabriel dejó funciones como nutrición para una fase posterior.
+
+**¿Por qué es importante para FitConnect?** Si el sistema no está bien organizado, cada cambio resultará costoso y podría generar errores en otras partes. Una arquitectura modular y un código ordenado permiten evolucionar el producto rápidamente y con menor costo, lo que es clave para adaptarse a las necesidades del mercado.
+
+## 4. Portabilidad
+
+**Atributo identificado:** Adaptabilidad a distintas plataformas y dispositivos.
+
+**Justificación del enunciado:** FitConnect es "una plataforma móvil" que debe "funcionar en dispositivos de gama media-baja", es decir, en celulares Android e iOS de distintas marcas y capacidades. Además, el panel de los entrenadores se ofrece también como aplicación web (Punto 5).
+
+**¿Por qué es importante para FitConnect?** Si la aplicación solo funcionara en una plataforma o en celulares de gama alta, se perdería una parte importante de los usuarios potenciales. Garantizar que funcione correctamente en diferentes sistemas operativos y navegadores amplía el alcance del proyecto y permite que cada usuario elija el dispositivo que le resulte más cómodo.
+
+## 5. Seguridad
+
+**Atributo identificado:** Confidencialidad e integridad de los datos personales y de pago.
+
+**Justificación del enunciado:** el sistema guarda información sensible: el seguimiento de "cada ejercicio" y el progreso del usuario, el "almacenamiento ilimitado de fotos de progreso" del plan premium y los pagos de suscripciones y de sesiones, sobre los que "FitConnect retiene una comisión por cada transacción". Además, existen distintos roles (usuario, entrenador, administrador) con diferentes permisos de acceso, y Mara exige consentimientos explícitos para los datos de salud y para cada foto.
+
+**¿Por qué es importante para FitConnect?** Una filtración de datos afectaría la privacidad de los usuarios, dañaría la reputación de la plataforma y podría generar sanciones legales (Ley 25.326 de Protección de Datos Personales). Por eso es fundamental proteger la información mediante autenticación, cifrado, control de acceso por roles y comunicación segura (HTTPS).
+
+## ¿Qué otros atributos de calidad no mencionados en el enunciado consideran críticos para FitConnect?
+
+1. **Fiabilidad:** FitConnect guarda el historial de entrenamientos y el progreso de cada usuario, y las reservas dependen de que el sistema esté operativo. Si la plataforma falla o se pierden datos, el usuario pierde meses de información y puede abandonar la aplicación.
+2. **Escalabilidad:** el proyecto apunta a sumar usuarios y entrenadores con el tiempo, y el historial crece con cada sesión registrada. El sistema debe mantener su rendimiento cuando aumenta la cantidad de usuarios y de datos, sin tener que rediseñarlo.
+3. **Interoperabilidad:** FitConnect se apoya en servicios externos: pasarela de pagos, correo electrónico y notificaciones push. Debe comunicarse con ellos de forma correcta y seguir funcionando de manera controlada si alguno falla.
+4. **Adecuación funcional:** las funciones deben dar resultados exactos. Por ejemplo, no puede haber dos reservas para el mismo horario, y los gráficos de progreso deben reflejar fielmente lo que el usuario registró. Un error en estos cálculos afecta directamente la confianza en la plataforma.
+
+## ¿Cómo medirían el cumplimiento de estos atributos de calidad?
+
+### Atributos de las categorías vistas en la materia
+
+- **Usabilidad:** se mide con pruebas a usuarios reales, en las que se cronometra el tiempo que tardan en completar una tarea, y con la encuesta de satisfacción SUS. La meta es que un usuario nuevo pueda registrar su primer entrenamiento en menos de 3 minutos y que el puntaje SUS sea mayor a 70.
+- **Eficiencia:** se mide con pruebas de carga y estrés, utilizando herramientas como JMeter o k6, y con el monitoreo de los tiempos de respuesta del sistema. También se mide el tamaño del instalador en cada versión y el tiempo de arranque en un celular de gama media-baja. Las metas son que las operaciones habituales respondan en menos de 3 segundos con 1.000 usuarios concurrentes, que la app inicie en menos de 3 segundos y que ocupe menos de 200 MB.
+- **Mantenibilidad:** se mide con el análisis del código mediante una herramienta como SonarQube, que informa la cobertura de pruebas y la complejidad ciclomática. La meta es una cobertura de pruebas mayor al 70 % en las funciones críticas.
+- **Portabilidad:** se mide con pruebas funcionales en distintos dispositivos, sistemas operativos y navegadores. La meta es que el 100 % de las funciones principales opere correctamente en Android, iOS, Chrome, Firefox, Safari y Edge.
+- **Seguridad:** se mide con pruebas de penetración y análisis de vulnerabilidades, por ejemplo con OWASP ZAP. La meta es no tener vulnerabilidades críticas antes del lanzamiento.
+
+### Atributos adicionales
+
+- **Fiabilidad:** se mide con el monitoreo del tiempo en funcionamiento (uptime), el registro de incidentes y pruebas de restauración de las copias de seguridad. La meta es una disponibilidad de al menos el 99,5 % mensual y que la restauración de datos sea exitosa en el 100 % de las pruebas.
+- **Escalabilidad:** se mide con pruebas de carga incrementales, en las que se duplica la cantidad de usuarios y de datos mientras se monitorea el uso de recursos. La meta es que, al duplicar los usuarios concurrentes, el tiempo de respuesta siga siendo menor a 3 segundos agregando instancias del servidor.
+- **Interoperabilidad:** se mide con pruebas de integración con la pasarela de pagos, el servicio de correo y las notificaciones push. La meta es que el 100 % de las transacciones de prueba se procese correctamente y que la falla de un servicio externo no provoque la caída del sistema.
+- **Adecuación funcional:** se mide con casos de prueba basados en los criterios de aceptación de las historias de usuario y con pruebas de concurrencia. La meta es aprobar el 100 % de los criterios de aceptación y no registrar ninguna reserva duplicada cuando varios usuarios intentan reservar el mismo horario a la vez.
