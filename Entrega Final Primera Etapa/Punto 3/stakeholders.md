@@ -1,54 +1,94 @@
-# Análisis de Stakeholders y Definición del MVP - FitConnect
+# Análisis de Stakeholders y Definición del MVP
 
-Este documento detalla los objetivos, restricciones y conflictos de los interesados del proyecto, justificando técnicamente el alcance del Producto Mínimo Viable (MVP) en base a los modelos de proceso evaluados.
-
----
-
-## 1. Objetivos y Restricciones de los Interesados
-
-* **Gabriel — Product Manager**
-  * **Objetivo:** Maximizar la conversión inicial y reducir la deserción temprana (churn) en el mercado fitness.
-  * **Restricción:** El onboarding y la configuración inicial deben completarse en un máximo de "3 taps".
-
-* **Ana — Head de Entrenadores**
-  * **Objetivo:** Garantizar la calidad del contenido y la fidelización de los profesionales de la salud y el entrenamiento.
-  * **Restricción:** Disponibilidad de herramientas estructuradas (plantillas y administración de rutinas) para evitar contenido genérico.
-
-* **Diego — CTO**
-  * **Objetivo:** Asegurar la viabilidad técnica, estabilidad y alta disponibilidad de la infraestructura.
-  * **Restricciones:** Instalador APK < 200MB, tiempo de arranque inicial < 3s, arquitectura de streaming CDN mediante protocolos HLS/DASH, y un objetivo mandatorio de 99.5% de uptime.
-
-* **Mara — Legal**
-  * **Objetivo:** Minimizar la exposición patrimonial, civil y regulatoria de la organización.
-  * **Restricciones:** Cumplimiento estricto de las normativas GDPR y HIPAA para el tratamiento de datos sensibles (fotografías de progreso premium).
+Este documento resume qué necesita cada stakeholder de FitConnect, en qué puntos sus necesidades entran en conflicto, cómo se resolvió cada conflicto y qué alcance tiene el Producto Mínimo Viable (MVP). La información surge del enunciado y de las consultas realizadas a cada stakeholder entre junio y octubre de 2026. Entre paréntesis se indica la fecha de la consulta de la que proviene cada dato.
 
 ---
 
-## 2. Matriz de Impacto de Conflictos Técnicos
+## 1. Stakeholders
 
-* **Conflicto de Producto (Gabriel vs Ana):** Priorizar un registro veloz postergando el panel de entrenadores genera un riesgo estimado de abandono del 85% por parte de los profesionales, dejando la plataforma sin oferta de contenido.
-* **Conflicto Regulatorio (Gabriel vs Mara):** Omitir pasos de validación legal para evitar fricción en el registro expone al proyecto a penalizaciones económicas y al bloqueo total del lanzamiento.
-* **Conflicto de Rendimiento (Diego vs Product):** Cargar la aplicación con videos embebidos y arquitecturas pesadas compromete los límites técnicos de memoria y forzará una reingeniería de código costosa.
+| Stakeholder | Rol | Qué representa |
+|---|---|---|
+| Gabriel | Product Manager | El negocio y la alta gerencia |
+| Ana | Head de Entrenadores | La oferta: los entrenadores |
+| Enzo | Usuario activo | La demanda: los deportistas |
+| Mara | Legal (Risk & Insurance) | El cumplimiento legal y la gestión de riesgos |
+| Diego | CTO / DevOps | La factibilidad técnica y la operación |
+
+### Gabriel, Product Manager
+
+- **Objetivo:** llegar a 15.000 usuarios y 200 entrenadores verificados en el MVP, y reducir el abandono temprano, que en el mercado fitness es muy alto (16/06).
+- **Necesidades:**
+  - Que el usuario configure su cuenta en menos de 3 toques y pueda empezar una rutina con su entrenador en 3 pasos (16/06).
+  - Que el programa inicial se recomiende según el nivel, el objetivo y la disponibilidad que declara el usuario, y luego se ajuste con su progreso (04/10).
+  - Rachas, logros y desafíos semanales para retener al usuario; la versión gratuita limitada a 2 programas para que Premium tenga valor (11/07).
+- **Restricciones:** nutrición, reportes para entrenadores y calendario avanzado quedan para una fase posterior (16/06, 04/10).
+
+### Ana, Head de Entrenadores
+
+- **Objetivo:** retener al menos al 85 % de los entrenadores (26/06).
+- **Necesidades:**
+  - Un panel de trabajo completo: plantillas para editar y duplicar planes, armado de rutinas arrastrando ejercicios, registro de alumnos y vista del progreso de cada uno (16/06, 26/06).
+  - Poder crear ejercicios nuevos, que quedan privados hasta ser revisados y aprobados (04/10).
+  - Comisión clara y calificación obligatoria: el alumno califica de 1 a 5 después de cada sesión, con comentario opcional (04/10).
+- **Restricciones:** reglas de entrenamiento que la app debe respetar: aumento semanal de carga de hasta 15 %, 48 horas de descanso entre sesiones del mismo grupo muscular, prerrequisitos por ejercicio y una pregunta posterior a la sesión sobre dolor (11/07).
+
+### Enzo, Usuario activo
+
+- **Objetivo:** ver que progresa y no lesionarse; su meta personal es lograr el muscle-up en 12 semanas (16/06, 26/06).
+- **Necesidades:**
+  - Gráficos de avance por mes y récords personales desde el primer día (16/06, 26/06).
+  - Modo "hoy 20 minutos": una rutina corta inmediata, sin navegar menús (26/06).
+  - Contador manual de repeticiones, sin sensores ni cámaras (26/06).
+  - Un aviso si está entrenando más de lo que aguanta, basado en su propio reporte de cómo se siente (26/06).
+- **Restricciones:** no quiere cargar datos médicos ni completar formularios largos (16/06). El costo y el equipamiento no son su barrera principal: entrena calistenia con una barra (16/06).
+
+### Mara, Legal (Risk & Insurance)
+
+- **Objetivo:** minimizar la exposición patrimonial, civil y regulatoria de FitConnect (16/06).
+- **Necesidades:**
+  - Términos y condiciones aceptados antes de cualquier transacción, con el porcentaje de comisión, el momento de la retención y una cláusula de exoneración por lesiones (16/06).
+  - Verificación documental de los entrenadores antes de que puedan publicar o cobrar: automatizada con un servicio externo y revisión manual en los casos dudosos (16/06, 04/10).
+  - Fotos de progreso con un consentimiento explícito y separado para cada foto que se sube, guardadas de forma cifrada y visibles solo para el usuario (11/07, 04/10).
+- **Restricciones:** los datos de salud y las fotos son datos sensibles; su protección debe estar desde las primeras iteraciones, no en etapas posteriores (16/06).
+
+### Diego, CTO / DevOps
+
+- **Objetivo:** que la plataforma sea técnicamente viable y estable (16/06).
+- **Necesidades:**
+  - Videos de ejercicios por streaming desde una red de distribución de contenido, nunca dentro de la app (16/06).
+  - Un equipo técnico especializado: dos desarrolladores mobile, dos backend, QA, un SRE junior y el CTO/DevOps (28/06, 04/10).
+- **Restricciones:** instalador de menos de 200 MB, arranque en menos de 3 segundos y 99,5 % de disponibilidad (enunciado, 16/06).
 
 ---
 
-## 3. Criterios de Aceptación Técnicos del MVP (Sprint 1)
+## 2. Conflictos y cómo se resolvieron
 
-Para resolver las discrepancias sin añadir burocracia organizativa, se establecen métricas duras de ingeniería para el código entregado:
-
-* **Métrica de Interfaz:** Verificación mediante pruebas de caja negra de que el flujo crítico de registro e inicio de actividad se realiza en un máximo de 3 taps, incluyendo la aceptación de términos legales.
-* **Métrica de Contenido Mínimo:** Los entrenadores deben disponer de al menos 3 plantillas estáticas de rutinas preconfiguradas para asegurar la oferta inicial de valor sin recurrir a un módulo drag-and-drop complejo.
-* **Métrica de Rendimiento de Infraestructura:** Pruebas automatizadas en el pipeline de integración que bloqueen el despliegue si la APK supera los 200MB o si el tiempo de carga en frío es superior a 3 segundos.
-* **Métrica de Seguridad:** Cifrado obligatorio en tránsito (TLS 1.3) y en reposo (AES-256) para el almacenamiento de imágenes en el servidor, con flujos opt-in independientes.
+| Conflicto | Postura de cada uno | Resolución acordada |
+|---|---|---|
+| **Qué entra en el primer sprint** (Gabriel y Ana) | Gabriel prioriza estabilizar la versión gratuita y el onboarding; Ana sostiene que sin herramientas para el entrenador no hay programas de calidad (16/06) | Gabriel acepta en el Sprint 1 un panel mínimo: seleccionar y duplicar plantillas, editar ejercicios, series y descansos, reordenar arrastrando, asignar planes y ver un progreso básico. Lo avanzado queda para después (04/10) |
+| **Porcentaje de comisión** (Ana y el negocio) | Ana proponía entre 20 % y 30 % (16/06) | Comisión fija y visible del 20 % por transacción en el MVP (Ana 04/10, Gabriel 06/10) |
+| **Registro rápido frente a requisitos legales** (Gabriel y Mara) | Gabriel exige menos de 3 toques; Mara exige términos y consentimientos explícitos | Los consentimientos se piden en el momento en que corresponden y no al registrarse: los términos, antes de la primera actividad o transacción; el de fotos, al subir cada foto (16/06, 04/10) |
+| **Contenido completo frente a los límites técnicos** (Enzo y Ana, frente a Diego) | La biblioteca necesita videos desde varios ángulos; Diego exige menos de 200 MB y menos de 3 segundos | Los videos se reproducen por streaming y la app solo descarga lo necesario; si el video tarda más de 800 ms, se muestra una imagen fija con instrucciones (16/06, 04/10) |
 
 ---
 
-## 4. Conclusión Técnica y Justificación del MVP
+## 3. Alcance del MVP
 
-La conformación de este alcance no es arbitraria, sino el resultado directo de cruzar las restricciones innegociables de la organización con las ventajas analizadas en los Modelos de Proceso del proyecto.
+Del análisis anterior surge el alcance del primer incremento:
 
-Se adopta un **Modelo de Ciclo de Vida Incremental** debido a que permite aislar el flujo de onboarding exigido por Producto para cumplir con los plazos del mercado. Al mismo tiempo, este enfoque modular otorga las ventanas de tiempo técnicas necesarias entre cada incremento para que el área de arquitectura evalúe el impacto real en memoria de la APK y valide el streaming adaptativo antes de expandir el sistema a gran escala.
+| Para quién | Qué incluye |
+|---|---|
+| Usuario | Registro en menos de 3 toques, programa recomendado según su nivel, biblioteca de ejercicios, programas de 4 a 16 semanas, contador manual de repeticiones, récords y gráficos de avance, reporte de cómo se sintió |
+| Entrenador | Panel mínimo (plantillas, duplicación, armado arrastrando ejercicios, asignación a alumnos y progreso básico), verificación de identidad y certificaciones, comisión del 20 % visible, calificación de 1 a 5 |
+| Legal | Términos y condiciones con exoneración, consentimientos separados para datos de salud y para cada foto |
+| Técnica | Streaming de videos, instalador de menos de 200 MB, arranque en menos de 3 segundos |
 
-Este enfoque de ingeniería garantiza que cada componente liberado sea técnicamente viable, legalmente seguro y comercialmente competitivo.
+Quedan para fases posteriores: nutrición, reportes detallados para entrenadores y calendario avanzado (16/06, 04/10).
 
+---
 
+## 4. Conclusión
+
+Las necesidades de los stakeholders no son fijas: durante el relevamiento cambiaron el porcentaje de comisión, el contenido del primer sprint y la forma de pedir los consentimientos. Además, la oferta (Ana) y la demanda (Gabriel y Enzo) dependen una de la otra, y cada incremento tiene que respetar los límites de Diego y de Mara.
+
+Por eso este análisis respalda la recomendación del Punto 3: **Scrum, complementado con un enfoque incremental**. Cada sprint entrega una parte usable del producto, permite volver a priorizar con los stakeholders lo que cambió y verificar en cada entrega las restricciones técnicas y legales, en lugar de descubrirlas al final.

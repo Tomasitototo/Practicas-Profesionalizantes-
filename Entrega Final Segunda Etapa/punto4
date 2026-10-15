@@ -1,0 +1,188 @@
+## Diagramas de interacción
+
+Para cada uno de los tres casos de uso del Punto 3 se define un **diagrama de secuencia**: muestra la interacción entre los participantes ordenada en el tiempo para un escenario concreto. Se representa el camino feliz (flujo básico) de cada caso de uso.
+
+### Elementos del diagrama
+
+| Elemento | Qué representa | Cómo se ve |
+|---|---|---|
+| Participante | Actor o componente que interviene | Rectángulo en la parte superior |
+| Línea de vida | El paso del tiempo para ese participante | Línea vertical hacia abajo |
+| Activación | El participante está ejecutando una operación | Rectángulo delgado sobre la línea de vida |
+| Mensaje síncrono | El emisor espera la respuesta antes de seguir | Flecha continua con punta llena |
+| Mensaje asíncrono | El emisor no espera respuesta | Flecha continua con punta abierta |
+| Retorno | La respuesta a un mensaje síncrono | Flecha discontinua con punta abierta |
+
+### Participantes
+
+Los participantes respetan la arquitectura del Punto 5 (cliente-servidor en capas, una sola aplicación y una sola base de datos):
+
+| Participante | Qué representa |
+|---|---|
+| Usuario, Entrenador, Alumno | Las personas que usan la app |
+| Sistema | La aplicación FitConnect: presentación, reglas de negocio y acceso a datos |
+| Base de Datos | La base de datos única del Punto 6 |
+| Pasarela de Pagos | Servicio externo que procesa los cobros (Stripe) |
+| Servicio de Notificaciones | Envío de notificaciones push y correos |
+
+---
+
+## CU-01: Asignar rutina personalizada
+
+**Escenario:** el entrenador arma una rutina, cumple las reglas de planificación y el alumno no tiene otra rutina activa.
+
+```mermaid
+sequenceDiagram
+    participant E as Entrenador
+    participant S as Sistema
+    participant BD as Base de Datos
+    participant N as Servicio de Notificaciones
+    participant A as Alumno
+
+    E->>+S: seleccionarAlumno(idAlumno)
+    S->>+BD: consultarPerfil(idAlumno)
+    BD--)-S: objetivos, nivel e historial
+    S--)-E: perfil del alumno
+
+    E->>+S: asignarRutina(idAlumno)
+    S->>+BD: consultarCatalogoYPlantillas()
+    BD--)-S: ejercicios, plantillas y rutinas previas
+    S--)-E: opciones: desde cero, plantilla o duplicar
+
+    E->>+S: confirmarAsignacion(idAlumno, ejercicios, series, repeticiones, descanso, dias, semanas)
+    S->>S: validarRutinaCompleta(rutina)
+    S->>S: evaluarReglasPlanificacion(rutina, nivelAlumno)
+    S->>+BD: consultarRutinaActiva(idAlumno)
+    BD--)-S: sinRutinaActiva
+    S->>+BD: registrarRutina(idAlumno, rutina, "Activa")
+    BD--)-S: rutinaRegistrada
+    S--)-E: confirmación de asignación
+    S-)N: notificarRutinaAsignada(idAlumno, idRutina)
+    N-)A: aviso de nueva rutina
+```
+
+| Paso del caso de uso | Mensajes |
+|---|---|
+| 1 y 2. Elegir al alumno y ver su perfil | `seleccionarAlumno`, `consultarPerfil` |
+| 3 y 4. Elegir "Asignar rutina" y la modalidad | `asignarRutina`, `consultarCatalogoYPlantillas` |
+| 5 a 7. Armar la rutina y confirmar | `confirmarAsignacion` |
+| 8. Validar que esté completa | `validarRutinaCompleta` |
+| 9. Evaluar 48 horas, 15 % y prerrequisitos | `evaluarReglasPlanificacion` |
+| 10. Verificar si hay rutina activa | `consultarRutinaActiva` |
+| 11 y 12. Registrar y confirmar | `registrarRutina`, confirmación de asignación |
+| 13. Notificar al alumno | `notificarRutinaAsignada`, aviso de nueva rutina |
+
+---
+
+## CU-02: Reservar sesión con entrenador
+
+**Escenario:** el horario está libre, el pago se aprueba dentro de los 10 minutos de retención y el entrenador acepta la solicitud.
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario
+    participant S as Sistema
+    participant BD as Base de Datos
+    participant P as Pasarela de Pagos
+    participant N as Servicio de Notificaciones
+    participant E as Entrenador
+
+    U->>+S: buscarEntrenadores(especialidad, tarifa, modalidad, disponibilidad)
+    S->>+BD: consultarEntrenadores(filtros)
+    BD--)-S: lista de entrenadores
+    S--)-U: entrenadores que coinciden
+
+    U->>+S: verPerfil(idEntrenador)
+    S->>+BD: consultarPerfilYHorarios(idEntrenador)
+    BD--)-S: valoraciones, precio y horarios libres
+    S--)-U: perfil del entrenador
+
+    U->>+S: seleccionarHorario(idHorario)
+    S--)-U: resumen, precio y política de cancelación
+
+    U->>+S: aceptarPoliticaYPagar(idHorario, versionPolitica)
+    S->>+BD: retenerHorario(idHorario, 10 minutos)
+    BD--)-S: horarioRetenido
+    S->>+P: autorizarPago(monto)
+    P--)-S: pagoAutorizado(idTransaccion)
+    S->>+BD: verificarRetencion(idHorario)
+    BD--)-S: retencionVigente
+    S->>+P: capturarCobro(idTransaccion)
+    P--)-S: cobroCapturado
+    S->>+BD: registrarReserva(idUsuario, idHorario, "Pendiente de aceptación")
+    BD--)-S: reservaRegistrada
+    S--)-U: reserva pendiente de aceptación
+    S-)N: notificarSolicitud(idEntrenador, montoARecibir)
+    N-)E: nueva solicitud de reserva
+
+    E->>+S: aceptarSolicitud(idReserva)
+    S->>+BD: confirmarReserva(idReserva, "Confirmada")
+    BD--)-S: reservaConfirmada
+    S--)-E: reserva confirmada
+    S-)N: enviarConfirmacion(idReserva)
+    N-)U: push y correo con el comprobante
+    N-)E: push con los detalles
+```
+
+| Paso del caso de uso | Mensajes |
+|---|---|
+| 1 y 2. Buscar con filtros | `buscarEntrenadores`, `consultarEntrenadores` |
+| 3 y 4. Ver el perfil y los horarios | `verPerfil`, `consultarPerfilYHorarios` |
+| 5 y 6. Elegir horario y ver el resumen | `seleccionarHorario` |
+| 7 y 8. Aceptar la política y retener el horario | `aceptarPoliticaYPagar`, `retenerHorario` |
+| 9 y 10. Pagar en la pasarela | `autorizarPago`, `pagoAutorizado` |
+| 11. Confirmar la retención, cobrar y registrar | `verificarRetencion`, `capturarCobro`, `registrarReserva`, `notificarSolicitud` |
+| 12 y 13. El entrenador acepta | `aceptarSolicitud`, `confirmarReserva` |
+| 14. Notificar a ambos | `enviarConfirmacion`, push y correo |
+
+---
+
+## CU-03: Contratar suscripción Premium
+
+**Escenario:** el usuario gratuito elige un plan, acepta los términos y la pasarela aprueba el cobro.
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario
+    participant S as Sistema
+    participant BD as Base de Datos
+    participant P as Pasarela de Pagos
+    participant N as Servicio de Notificaciones
+
+    U->>+S: obtenerPremium()
+    S->>+BD: consultarPlanes()
+    BD--)-S: planes, precios y beneficios
+    S--)-U: comparativa Gratuito y Premium
+
+    U->>+S: seleccionarModalidad("mensual" o "anual")
+    S--)-U: resumen, renovación automática y términos
+
+    U->>+S: confirmarYPagar(versionTerminos)
+    S->>+BD: guardarAceptacion(idUsuario, versionTerminos, fecha)
+    BD--)-S: aceptacionGuardada
+    S--)-U: formulario seguro de la pasarela
+
+    U->>+P: ingresarDatosTarjeta(datos)
+    P-)S: cobroAprobado(idTransaccion)
+    P--)-U: pago procesado
+    activate S
+    S->>+BD: registrarPago(idUsuario, idTransaccion, monto)
+    BD--)-S: pagoRegistrado
+    S->>+BD: actualizarPlan(idUsuario, "Premium")
+    BD--)-S: planActualizado
+    S-)N: enviarBienvenidaYComprobante(idUsuario)
+    deactivate S
+    N-)U: notificación de bienvenida y comprobante por correo
+```
+
+| Paso del caso de uso | Mensajes |
+|---|---|
+| 1 y 2. Pedir Premium y ver la comparativa | `obtenerPremium`, `consultarPlanes` |
+| 3 y 4. Elegir modalidad y ver el resumen | `seleccionarModalidad` |
+| 5 y 6. Aceptar los términos y abrir la pasarela | `confirmarYPagar`, `guardarAceptacion` |
+| 7. Ingresar la tarjeta en la pasarela | `ingresarDatosTarjeta` |
+| 8. La pasarela avisa que el cobro se aprobó | `cobroAprobado` (asíncrono: el sistema no lo pidió en ese momento) |
+| 9. Activar Premium | `registrarPago`, `actualizarPlan` |
+| 10. Bienvenida y comprobante | `enviarBienvenidaYComprobante` |
+
+FitConnect no recibe los datos de la tarjeta: el usuario los carga directamente en la pasarela, y el sistema solo guarda el identificador de la transacción.
