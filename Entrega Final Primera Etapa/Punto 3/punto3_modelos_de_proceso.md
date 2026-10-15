@@ -1,90 +1,51 @@
-# Punto 3 – Modelos de Proceso
+# Punto 3: Modelos de Proceso
 
-**FitConnect – Trabajo Práctico Primera Etapa**  
-**Integrantes del grupo:** Agustín Curvetto y Santiago Menghi
-
----
-
-# Análisis Comparativo de los Modelos de Proceso Aplicados a FitConnect
-
-A continuación, se evalúan los distintos modelos de proceso de ingeniería de software, detallando sus ventajas y desventajas específicas frente a las necesidades técnicas, de negocio y legales de FitConnect.
-
-## 1. Modelo Cascada
-
-* **Ventaja aplicada a FitConnect:** Permite definir de manera sumamente estricta y documentada desde el primer día los requisitos de rendimiento innegociables exigidos por el CTO. Diego estableció límites claros: instalador menor a 200MB, inicio en menos de 3 segundos, arquitectura CDN con protocolo HLS/DASH, y caché local de 50MB con fallback automático.
-
-* **Desventaja aplicada a FitConnect:** Es completamente inviable debido al conflicto de prioridades en el MVP. Gabriel necesita captar 15.000 usuarios en 3 meses con onboarding en máximo 3 taps, mientras que Ana advierte que el 85% de los entrenadores abandonará si no hay herramientas desde el inicio. Cascada no permite reconciliar estas demandas contradictorias hasta fases muy avanzadas.
-
-## 2. Modelo en V
-
-* **Ventaja aplicada a FitConnect:** Vincula directamente cada fase de diseño con su respectivo plan de pruebas. Esto facilita la verificación temprana del backend para soportar un 99.5% de uptime y validar el fallback automático en paralelo con el desarrollo, reduciendo riesgos técnicos.
-
-* **Desventaja aplicada a FitConnect:** Carece de la flexibilidad necesaria para resolver las discrepancias operativas del equipo. Si en fases avanzadas de la verificación se descubre que el flujo de onboarding requiere cambios arquitectónicos, el modelo no permite pivotear sin descartar trabajo considerable.
-
-## 3. Modelo Incremental
-
-* **Ventaja aplicada a FitConnect:** Permite lanzar la aplicación por partes, priorizando la visión de Gabriel para captar los 15.000 usuarios iniciales con funcionalidades básicas de descubrimiento de entrenadores. Las fases posteriores incorporan herramientas de creación de rutinas.
-
-* **Desventaja aplicada a FitConnect:** Representa un peligro comercial y de adopción crítico. Ana advierte que sin herramientas de gestión desde el inicio, no alcanzará su objetivo de retención de entrenadores. Si la fase 1 no incluye capacidades mínimas de creación de rutinas, fracasará la base de suministro de contenido que alimenta el modelo de negocio freemium.
-
-## 4. Modelo Iterativo
-
-* **Ventaja aplicada a FitConnect:** Ayuda a combatir el brutal "churn" (deserción) del mercado fitness que tanto preocupa a Gabriel. Las iteraciones cortas permiten recopilar feedback de usuarios reales y ajustar rápidamente la experiencia para mejorar retención en cada ciclo.
-
-* **Desventaja aplicada a FitConnect:** Existe el riesgo de que el equipo dedique demasiado tiempo a cambios poco importantes en la interfaz de usuario sin avanzar en funcionalidades críticas. Además, sin una estrategia clara sobre cumplimiento regulatorio, pueden exponerse datos sensibles de fotos de progreso sin las protecciones legales requeridas.
-
-## 5. Modelo de Prototipos
-
-* **Ventaja aplicada a FitConnect:** Es ideal para diseñar maquetas rápidas de la herramienta drag-and-drop para rutinas que Ana necesita o las pantallas de onboarding que Gabriel quiere validar antes de inversión de desarrollo profundo. Los prototipos permiten tomar decisiones informadas sobre requisitos conflictivos.
-
-* **Desventaja aplicada a FitConnect:** Existe el riesgo de utilizar los prototipos como producto final sin realizar las mejoras estructurales necesarias. Si se presentan prototipos a usuarios finales y luego debe refactorizarse la arquitectura para cumplir con los límites técnicos de Diego o los requisitos legales de Mara, se perderá credibilidad y tiempo valioso.
-
-## 6. Modelo en Espiral
-
-* **Ventaja aplicada a FitConnect:** Es excelente para identificar y reducir riesgos durante todo el proyecto. Permite evaluaciones iterativas de conformidad regulatoria (GDPR/HIPAA) que Mara considera críticas. Cada ciclo espiral incluye análisis de riesgos: técnicos, de negocio, de retención y legales.
-
-* **Desventaja aplicada a FitConnect:** Requiere más tiempo, planificación y recursos que otros modelos. Esto retrasaría drásticamente el lanzamiento del MVP, conflictando directamente con el objetivo de Gabriel de captar 15.000 usuarios en 3 meses. El overhead de gestión de riesgos iterativa no es viable bajo presión comercial de lanzamiento rápido.
-
-## 7. Modelo Ágil (Scrum)
-
-* **Ventaja aplicada a FitConnect:** Permite trabajar en períodos cortos llamados sprints, facilitando la incorporación de cambios frecuentes basados en feedback de usuarios. Los sprints de 2 semanas permiten al equipo reconciliar las demandas contradictorias de Gabriel (onboarding rápido), Ana (herramientas de entrenadores), Diego (restricciones técnicas) y Mara (cumplimiento legal) de forma incremental.
-
-* **Desventaja aplicada a FitConnect:** Requiere participación activa de todos los involucrados y rigurosa organización. Si los stakeholders no están disponibles para sesiones de Sprint Planning o revisiones de Sprint, las decisiones se retrasan y el equipo trabaja sobre supuestos incorrectos.
+**FitConnect: Trabajo Práctico, Primera Etapa**
+**Integrantes del grupo:** Agustín Curvetto, Santiago Menghi, Bautista Suero y Tomás Rodil
 
 ---
 
-# Respuestas a las Preguntas del Proyecto
+## Análisis comparativo de los modelos de proceso aplicados a FitConnect
+
+La siguiente tabla evalúa cada modelo de proceso visto en la materia, con una ventaja y una desventaja de aplicarlo a FitConnect según las necesidades técnicas, de negocio y legales relevadas con los stakeholders.
+
+| Modelo de Proceso | Ventaja | Desventaja |
+|---|---|---|
+| **Modelo Cascada** | Permite definir desde el primer día, de forma estricta y documentada, los requisitos de rendimiento de Diego: instalador menor a 200 MB, inicio en menos de 3 segundos, streaming por CDN (HLS/DASH) y caché local de 50 MB con fallback automático. | Es inviable por el conflicto de prioridades del MVP: Gabriel necesita captar 15.000 usuarios con un registro de máximo 3 toques, y Ana advierte que sin herramientas desde el inicio los entrenadores abandonan (su meta es retener al 85 %). Cascada no permite reconciliar estas demandas hasta fases muy avanzadas. |
+| **Modelo en V** | Vincula cada fase de diseño con su plan de pruebas. Facilita verificar temprano que el backend soporte un 99,5 % de disponibilidad y validar el fallback automático en paralelo con el desarrollo, reduciendo riesgos técnicos. | Carece de la flexibilidad necesaria para resolver las discrepancias entre stakeholders. Si en fases avanzadas de la verificación se descubre que el registro requiere cambios de arquitectura, el modelo no permite cambiar de rumbo sin descartar trabajo considerable. |
+| **Modelo Incremental** | Permite lanzar la aplicación por partes, priorizando la visión de Gabriel: un primer incremento con la versión gratuita (biblioteca de ejercicios y programas básicos) para captar los 15.000 usuarios iniciales. | Si el primer incremento no incluye herramientas mínimas para crear rutinas, Ana no alcanza su objetivo de retener al 85 % de los entrenadores, y fracasa la fuente de contenido que alimenta el modelo freemium. |
+| **Modelo Iterativo** | Ayuda a combatir la deserción del mercado fitness, que Gabriel describe como "brutal". Las iteraciones cortas permiten recopilar opiniones de usuarios reales y ajustar rápidamente la experiencia para mejorar la retención en cada ciclo. | Existe el riesgo de dedicar demasiado tiempo a cambios poco importantes en la interfaz sin avanzar en funcionalidades críticas. Además, sin una estrategia clara de cumplimiento legal, las fotos de progreso pueden quedar expuestas sin las protecciones que exige Mara. |
+| **Modelo de Prototipos** | Es ideal para diseñar maquetas rápidas del armado de rutinas arrastrando ejercicios que necesita Ana, o de las pantallas de registro que Gabriel quiere validar, antes de invertir en el desarrollo. Permite tomar decisiones informadas sobre requisitos en conflicto. | Existe el riesgo de usar los prototipos como producto final sin las mejoras estructurales necesarias. Si después hay que rehacer la arquitectura para cumplir los límites técnicos de Diego o los requisitos legales de Mara, se pierde credibilidad y tiempo. |
+| **Modelo en Espiral** | Es excelente para identificar y reducir riesgos durante todo el proyecto. Permite evaluar en cada ciclo el cumplimiento de las normas de privacidad (GDPR y HIPAA) que Mara considera críticas, junto con los riesgos técnicos, de negocio y de retención. | Requiere más tiempo, planificación y recursos que otros modelos. Retrasaría el lanzamiento del MVP, en conflicto con el objetivo de Gabriel de captar rápido los primeros 15.000 usuarios. |
+| **Modelo Ágil (Scrum/XP)** | Permite trabajar en sprints cortos e incorporar cambios frecuentes basados en la opinión de los usuarios. Los sprints de 2 semanas permiten reconciliar las demandas de Gabriel (registro rápido), Ana (herramientas para entrenadores), Diego (restricciones técnicas) y Mara (cumplimiento legal). Las prácticas de XP, como las pruebas automatizadas, responden a lo que pidió Diego: QA y pruebas desde el primer día. | Requiere participación activa de todos los involucrados y una organización rigurosa. Si los stakeholders no están disponibles para la planificación y las revisiones de cada sprint, las decisiones se retrasan y el equipo trabaja sobre supuestos incorrectos. |
+
+---
+
+## Respuestas a las preguntas del proyecto
 
 ### ¿Qué modelo de proceso recomendarían para FitConnect y por qué?
 
-**Recomendación:** Se recomienda utilizar el **Modelo Ágil (Scrum)**, complementado con un enfoque incremental para la liberación de las primeras iteraciones de la plataforma.
+**Recomendación:** se recomienda utilizar el **Modelo Ágil (Scrum)**, complementado con un enfoque incremental para la liberación de las primeras versiones de la plataforma.
 
-**Justificación:** FitConnect es un marketplace simbiótico donde coexisten dos tipos de usuarios con necesidades interdependientes pero en conflicto directo para el MVP. Por un lado, Gabriel necesita captar 15.000 usuarios en 3 meses con onboarding en máximo 3 taps. Por otro, Ana advierte que el 85% de los entrenadores abandonará si no hay herramientas desde el inicio.
+**Justificación:** FitConnect es un marketplace donde conviven dos tipos de usuarios con necesidades que dependen una de la otra, pero que compiten por el primer lanzamiento. Por un lado, Gabriel necesita captar 15.000 usuarios con un registro de máximo 3 toques. Por otro, Ana advierte que, sin herramientas desde el inicio, los entrenadores abandonan la plataforma, y su meta es retener al 85 %.
 
-Scrum permite solucionar este conflicto mediante sesiones de Sprint Planning donde los requerimientos se fragmentan en Historias de Usuario mínimas viables. De esta manera:
+Scrum permite resolver este conflicto en la planificación de cada sprint, donde los requerimientos se dividen en historias de usuario mínimas. Así se acordó con los stakeholders:
 
-- **Sprint 1-2:** Núcleo de usuario gratuito + descubrimiento de entrenadores + herramientas básicas de creación de rutinas
-- **Sprint 3-4:** Herramientas avanzadas drag-and-drop + panel de progreso de clientes + encriptación de fotos
-- **Sprint 5+:** Optimización de performance, fallback automático, auditoría de acceso
+- **Sprints 1 y 2 (primer incremento, el MVP):** registro en máximo 3 toques con un programa recomendado según el nivel del usuario; biblioteca de ejercicios y programas de 4 a 16 semanas; registro de entrenamientos con contador manual de repeticiones, récords y gráficos de avance; panel mínimo del entrenador (plantillas, duplicación, armado de rutinas arrastrando ejercicios, asignación a alumnos y progreso básico); comisión del 20 % visible y calificación de 1 a 5; términos y consentimientos separados, y fotos de progreso cifradas.
+- **Sprints 3 y 4:** búsqueda en el marketplace por especialidad, tarifa y disponibilidad; reserva de sesiones; suscripción premium; comunidad con rachas y desafíos.
+- **Sprint 5 en adelante:** calendario avanzado, reportes detallados para entrenadores, nutrición y optimizaciones de rendimiento.
 
-Cada sprint incluye verificación de restricciones técnicas (Diego con benchmarks), cumplimiento regulatorio (Mara revisa acceso a datos sensibles) y métricas de retención (Gabriel mide abandono en onboarding).
-
----
+Cada sprint incluye la verificación de las restricciones técnicas (Diego con pruebas de rendimiento), del cumplimiento legal (Mara revisa el acceso a datos sensibles) y de las métricas de retención (Gabriel mide el abandono en el registro).
 
 ### ¿Qué factores del proyecto influyeron en su decisión?
 
-Los factores determinantes extraídos de las necesidades del proyecto son:
-
-* **La interdependencia y conflicto de roles en el MVP:** El modelo de negocio freemium se alimenta de la calidad del trabajo del entrenador. Si Ana ve que los entrenadores abandonan, el flujo de contenido colapsa y Gabriel no puede justificar la retención de usuarios gratuitos. Scrum permite que ambas necesidades avancen en paralelo dentro de cada sprint, evitando la parálisis de cascada.
-
-* **Las severas restricciones técnicas de arquitectura:** Diego fijó límites estrictos (instalador <200MB, arranque <3s, CDN con HLS/DASH, caché local 50MB, uptime 99.5%). Scrum con sprints de 2 semanas permite validación incremental de cada restricción sin esperar al final del proyecto. Si un sprint viola algún límite, se detecta y corrige inmediatamente.
-
-* **El alto riesgo regulatorio y patrimonial:** Las fotografías de progreso premium constituyen datos sensibles vinculados a la salud, sujetos a GDPR y HIPAA. Scrum permite revisiones de compliance en la Demo del Sprint y Sprint Retrospective, asegurando que no se acumule deuda de conformidad.
-
-* **La volatilidad y el churn del mercado fitness:** Gabriel señala que la deserción en el mercado fitness es brutal. Scrum con feedback de usuarios en cada sprint permite pivotar rápidamente la experiencia de onboarding si las métricas de retención están bajando.
+- **La dependencia entre oferta y demanda en el MVP:** el modelo freemium se alimenta de la calidad del trabajo del entrenador. Si los entrenadores abandonan, el flujo de contenido colapsa y Gabriel no puede retener a los usuarios gratuitos. Scrum permite que ambas necesidades avancen en paralelo dentro de cada sprint, evitando la parálisis de cascada.
+- **Las restricciones técnicas:** Diego fijó límites estrictos (instalador menor a 200 MB, arranque en menos de 3 segundos, CDN con HLS/DASH, caché local de 50 MB y 99,5 % de disponibilidad). Con sprints de 2 semanas, cada restricción se valida a medida que se construye; si un sprint viola algún límite, se detecta y corrige de inmediato.
+- **El riesgo legal y patrimonial:** las fotos de progreso son datos sensibles vinculados a la salud, sujetos a GDPR y HIPAA, y Mara exige que su protección esté desde las primeras iteraciones. Scrum permite revisar el cumplimiento en la revisión y la retrospectiva de cada sprint, para que no se acumulen deudas legales.
+- **Los cambios en las necesidades de los stakeholders:** durante el relevamiento cambiaron el porcentaje de comisión (de una propuesta de 20 % a 30 % a un 20 % fijo) y el contenido del primer sprint. Scrum permite volver a priorizar en cada sprint sin rehacer el plan completo.
 
 ---
 
 ## Conclusión
 
-El Modelo Ágil (Scrum) es el más adecuado para FitConnect porque reconcilia la urgencia comercial (lanzamiento en 3 meses), la complejidad técnica (múltiples restricciones), la volatilidad del negocio (churn alto) y los requisitos regulatorios (datos sensibles de salud). Los otros modelos, si bien tienen fortalezas específicas, no logran manejar simultáneamente estos cuatro ejes de presión sin sacrificar alguno de ellos.
+El Modelo Ágil (Scrum), con entregas incrementales, es el más adecuado para FitConnect porque reconcilia la urgencia comercial (lanzar rápido el MVP), la complejidad técnica (múltiples restricciones), la volatilidad del negocio (alta deserción) y los requisitos legales (datos sensibles de salud). Los otros modelos tienen fortalezas específicas, pero no logran manejar al mismo tiempo estos cuatro ejes sin sacrificar alguno.
