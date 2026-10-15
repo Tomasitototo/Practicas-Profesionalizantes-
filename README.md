@@ -2,7 +2,7 @@
 
 Trabajo práctico grupal de la materia Prácticas Profesionalizantes 1 (prof. Jorge Capoduri) sobre **FitConnect**, una plataforma móvil que conecta entrenadores personales especializados en calistenia con personas que quieren entrenar sin equipamiento.
 
-**Integrantes:** Agustín Curvetto, Santiago Menghi, Bautista Suerto y Tomás Rodil.
+**Integrantes:** Agustín Curvetto, Santiago Menghi, Bautista Suero y Tomás Rodil.
 
 ---
 
