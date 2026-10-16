@@ -83,13 +83,6 @@ También está el documento completo en [Word](Punto3_Casos_de_Uso_FitConnect.do
 - Las versiones anteriores de la rutina y el historial de entrenamiento se conservan.
 
 
-**Supuestos del equipo**
-
-- Las reglas de planificación (48 horas, 15 %, prerrequisitos) las definió Ana. Son preventivas: no bloquean ni reemplazan su criterio.
-- El nivel inicial se registra o confirma al vincular al alumno (fuera de este caso de uso). Mientras esté pendiente, la ficha lo muestra y el plan prioriza ejercicios introductorios (Ana).
-- El canal de notificación de rutinas no está definido; se usa el que el usuario configure en sus preferencias (Enzo pidió poder elegirlas).
-
-
 **Diagrama UML del caso de uso**
 
 ![Diagrama CU-01](diagramas/CU-01_diagrama.png)
@@ -189,14 +182,7 @@ También está el documento completo en [Word](Punto3_Casos_de_Uso_FitConnect.do
 - Si la reserva se cancela a tiempo, el horario vuelve a estar disponible.
 
 
-**Supuestos del equipo**
-
-- Comisión (Gabriel, recomendación para el MVP): el precio publicado es lo que paga el usuario y FitConnect descuenta el 20 % de lo que cobra el entrenador. Se muestran ambos importes antes de confirmar: el usuario ve lo que paga y el entrenador, lo que recibirá. Impuestos y otros cargos están por definir.
-- El plazo de 12 horas para que el entrenador acepte o rechace lo propuso Gabriel.
-- Retención de 10 minutos (Diego): es viable si la controla el backend con el reloj del servidor. Se recomienda autorizar el pago durante la retención y capturarlo cuando el backend confirme que sigue vigente. La coordinación entre base de datos y pasarela requiere reintentos y conciliación.
-- Criterios iniciales de Mara, no aprobados como política: reembolso del 100 % con 24 horas o más; 50 % con menos de 24 horas (total si el horario vuelve a ocuparse); ausencia del entrenador sin causa válida, 100 % sin comisión (se podría evaluar un crédito promocional); fuerza mayor, reprogramación sin cargo o 100 %. Deben validarse con asesoría legal y Finanzas (normas de consumo, comisiones no recuperables y plazos).
-- El plazo exacto de acreditación del reembolso depende del medio de pago y se informa antes de confirmar la cancelación.
-- Notificaciones (Enzo): push para aceptación, cancelación, cambios de horario y recordatorios; correo solo para la confirmación y el comprobante; el usuario puede elegir sus preferencias.
+**Aclaración:** los porcentajes de reembolso por cancelación (100 % con 24 horas o más de anticipación, 50 % con menos) y el tratamiento de la ausencia del entrenador o de fuerza mayor son criterios propuestos por Mara, pendientes de aprobación por asesoría legal y Finanzas.
 
 
 **Diagrama UML del caso de uso**
@@ -259,11 +245,7 @@ También está el documento completo en [Word](Punto3_Casos_de_Uso_FitConnect.do
 - FitConnect no almacena los datos completos de la tarjeta; solo guarda el identificador de la transacción para auditoría y cobros recurrentes.
 
 
-**Supuestos del equipo**
-
-- Los precios, períodos y condiciones de renovación no están definidos en las fuentes; se muestran los vigentes al momento de la compra.
-- Regla propuesta por Mara, pendiente de aprobación: la renovación automática puede cancelarse en cualquier momento desde la cuenta, con confirmación inmediata y sin contactar a soporte. La cancelación detiene el próximo cobro y mantiene el acceso Premium hasta el final del período pagado, sin reembolso prorrateado. Esa cancelación queda fuera de este caso de uso.
-- Los derechos de desistimiento, cobros duplicados y errores de facturación pueden requerir un tratamiento distinto según la jurisdicción.
+**Aclaración:** la regla de cancelación de la renovación automática es una propuesta de Mara, pendiente de aprobación. Los precios y períodos de los planes todavía no están definidos.
 
 
 **Diagrama UML del caso de uso**
